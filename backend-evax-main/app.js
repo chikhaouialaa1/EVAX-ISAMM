@@ -13,3 +13,8 @@ var dbconnect=require("./config/database")
 app.listen(process.env.PORT,()=>{
     console.log("this serveur is runing on port",process.env.PORT)
 })
+
+
+user_routes=require("./routes/user-routes")
+app.use(user_routes)
+
