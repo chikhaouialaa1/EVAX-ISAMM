@@ -22,7 +22,6 @@ vaccinationCentreSchema=mongoose.Schema({
     rendervous :  {
         type : String
     } 
-   
-})
+   })
 
 module.exports=centre=(mongoose.model('vaccinationcentreSchema', vaccinationCentreSchema));
