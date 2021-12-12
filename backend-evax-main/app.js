@@ -15,10 +15,10 @@ app.listen(process.env.PORT,()=>{
 })
 
 
+user_routes=require("./routes/user-routes")
+app.use(user_routes)
 
 
 admin_routes=require("./routes/admin-routers")
 app.use(admin_routes)
-
-
 
