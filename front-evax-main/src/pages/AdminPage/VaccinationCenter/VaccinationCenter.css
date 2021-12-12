@@ -1,0 +1,5 @@
+.vaccinationCenter{
+    display: flex;
+    flex-direction: row;
+    
+}
