@@ -20,11 +20,11 @@ const SECRET_KEY=process.env.SECRET_KEY
 router.use(express.json())
 
 
-router.post("/register",async (req,res)=>{
+router.post("/user/register",async (req,res)=>{
   console.log("tesst")
 
    try {
-   const { first_name, last_name, email, password } = req.body;
+   const { first_name, last_name, email, password,date_nais,ncin,nmobile } = req.body;
 
    if (!(email && password && first_name && last_name)) {
     res.status(400).send("All input is required");
@@ -43,6 +43,9 @@ router.post("/register",async (req,res)=>{
     first_name,
     last_name,
     email: email.toLowerCase(),
+    date_nais,
+    ncin,
+    nmobile,
     password: encryptedPassword,
   });
 
@@ -73,7 +76,7 @@ router.post("/register",async (req,res)=>{
 
 })
 
-router.post("/login", async (req, res) => {
+router.post("/user/login", async (req, res) => {
 
   try {
     const { email, password } = req.body;
@@ -126,7 +129,7 @@ try{
   }
 });
 
-router.post("/account/validation",middlewares.verifyjwt, async (req, res) => {
+router.post("user/account/validation",middlewares.verifyjwt, async (req, res) => {
   const token = req.headers['authorization']
   dcodedToken = jwt.verify(token,process.env.SECRET_KEY);
   userid=dcodedToken.user_id
