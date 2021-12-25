@@ -36,6 +36,7 @@ function InscriSteps() {
                 <div className="steps-content">{steps[current].content}</div>
                 <div className="steps-action">
                   {current < steps.length - 1 && (
+                    console.log(current),
                     <Button className="suivant" onClick={() => next()}>
                       Suivant
                     </Button>
