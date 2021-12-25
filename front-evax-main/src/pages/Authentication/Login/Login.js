@@ -10,8 +10,19 @@ import { useState } from 'react'
 import { useDispatch } from "react-redux";
 import  authUser from "../../../actions/auth-user-action"
 
+import {badpassword} from '../../../services/auth-Service'
+
+import { Alert } from 'antd';
+//import { Redirect } from 'react-router-dom';
+
+import { Navigate } from 'react-router-dom';
+
+
 
 function Login() {
+    //console.log(badpassword)
+   let  badpassword=false
+
 /*
     console.log("teeessstttt")  
     let res =  AuthService("mayssamelliti@gmail.com","123")
@@ -63,6 +74,12 @@ function Login() {
                      }}
                     className="suivant">Login </Button>
                 </div>
+                {badpassword ?
+                    <Alert message="bad password please try again" type="error" showIcon />
+                    :
+                    <Navigate to="/" /> 
+                }
+            
             </div>
             
             <img src="/vacc.jpg" alt="inscription" className="img"/>

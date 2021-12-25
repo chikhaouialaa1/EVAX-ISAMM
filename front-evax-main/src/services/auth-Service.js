@@ -1,19 +1,25 @@
 import React , {useEffect,useState} from 'react'
 import axios from 'axios'
 
+
+let badpassword = false 
+
 function AuthService(email , password) {
-    const [token,settoken]=useState()
-    useEffect(()=>{
+
           axios.post('http://localhost:4000/user/login',{ email :email,password:password }).then(res=>{    
-            console.log(res.data)   
+            console.log("++++",res.data)   
             localStorage.setItem('token', res.data); // write
-             return (res.data)
+            //this.props.history.push('/');
+
         }
         ).catch(
+          badpassword=true,
             err=>{
+              console.log("---",err)
             return (err)
         }
         )
-    })
+    
 }
 export default AuthService
+export {badpassword}
