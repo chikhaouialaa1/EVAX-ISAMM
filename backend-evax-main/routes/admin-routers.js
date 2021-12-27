@@ -3,9 +3,11 @@ const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
 const ConfirmationUsers = require("../model/confirmedUsersSchema");
 const VaccinesSchema = require("../model/VaccinesSchema");
-const Centre = require("../model/vaccinationCentreSchema");
-const Message = require("../model/ContactSchema");
 
+const Message = require("../model/ContactSchema");
+const Centre = require("../model/vaccinationCentreSchema");
+const gouvernorat = require("../model/gouvernoratSchema");
+const ville = require("../model/ville")
 const Operator = require("../model/OperatorSchema");
 
 const router = express.Router();
