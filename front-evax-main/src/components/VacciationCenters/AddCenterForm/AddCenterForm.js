@@ -63,6 +63,8 @@ function AddCenterForm() {
             </Select>
             <h6>Responsable</h6>
             <Input placeholder="Entrer centre" className="input"/>
+            <h6>Capacité</h6>
+            <Input placeholder="Entrer capacité du centre pour chaque 1/2 heure" className="input"/>
             <Button className="button">Ajouter Centre</Button>
         </div>
     )

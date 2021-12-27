@@ -108,9 +108,42 @@ router.post("/Vaccination-centre-id", function (req, res) {
 
 //check all centres
 router.get("/Vaccination-centre-list", function (req, res) {
-  Centre.find({}, (err, data) => {
+  Centre.find()
+    .populate({ path: "ville", select: "name" })
+    .then((vacc) => {
+      res.json(vacc);
+    });
+});
+
+//get all gouvernment
+router.get("/gouvernorat", function (req, res) {
+  gouvernorat.find({}, (err, data) => {
     return res.send(data).status(200);
   });
+});
+//check all ville
+router.get("/ville", function (req, res) {
+  ville
+    .find()
+    .populate({ path: "gouvernorat", select: "name" })
+    .then((v) => {
+      res.json(v);
+    });
+});
+//get ville by gouvernorat
+router.post("/gouvernorat-id", function (req, res) {
+  //  try{
+  var gouvId = req.body._id;
+  try {
+    gouvernorat
+      .findOne({ _id: gouvId })
+      .populate("ville") // key to populate
+      .then((gouv) => {
+        res.json(gouv);
+      });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 //get Messages
