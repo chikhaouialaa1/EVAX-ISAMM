@@ -2,10 +2,11 @@ const express= require("express") ;
 const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
 const ConfirmationUsers = require("../model/confirmedUsersSchema");
-const VaccinesSchema = require("../model/VaccinesSchema");
-const Centre = require("../model/vaccinationCentreSchema");
 
-const Operator = require("../model/OperatorSchema");
+const Centre = require("../model/vaccinationCentreSchema");
+const gouvernorat = require("../model/gouvernoratSchema");
+const ville = require("../model/ville")
+
 
 
 
@@ -14,18 +15,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 var nodemailer = require('nodemailer');
-const middlewares=require("../middleware/user-midlewares");
 const SECRET_KEY=process.env.SECRET_KEY
 router.use(express.json())
 
 
 //creat new centre 
-router.post('/new-vaccination-centre',middlewares.isAdmin, function(req, res){
+router.post('/new-vaccination-centre', function(req, res){
     try{
         var centre=req.body
+        var villeID = req.body.ville
         console.log(centre)
 
-        Centre.create(centre).then(()=>{
+        Centre.create(centre).then((res)=>{
             return res.status(200).send("centre created successfully")
         })
     }
@@ -35,7 +36,7 @@ router.post('/new-vaccination-centre',middlewares.isAdmin, function(req, res){
 
 
 //update centre
-router.post('/Vaccination-centre-updated',middlewares.isAdmin, function(req, res){
+router.post('/Vaccination-centre-updated', function(req, res){
     try{
         var centreId=req.body._id
         const {name,gouvernement,manager} = req.body
@@ -56,7 +57,7 @@ router.post('/Vaccination-centre-updated',middlewares.isAdmin, function(req, res
 })
 
 //delete centre
-router.post('/Vaccination-centre-del',middlewares.isAdmin, function(req, res){
+router.post('/Vaccination-centre-del', function(req, res){
     try{
         var centreId=req.body._id
         console.log(centreId)
@@ -76,7 +77,7 @@ router.post('/Vaccination-centre-del',middlewares.isAdmin, function(req, res){
 })
 
 //check specific centre
- router.post('/Vaccination-centre-id',middlewares.isAdmin, function(req, res){
+ router.post('/Vaccination-centre-id', function(req, res){
   //  try{
         var centreId=req.body._id
         console.log(centreId)
@@ -99,12 +100,45 @@ router.post('/Vaccination-centre-del',middlewares.isAdmin, function(req, res){
 
 
 //check all centres
-router.get('/Vaccination-centre-list',middlewares.isAdmin, function(req, res){
-    Centre.find({},(err,data)=> {
+router.get('/Vaccination-centre-list', function(req, res){
+    Centre.find().populate({path: "ville", select:"name"}).then(vacc=>{
+        res.json(vacc);
+    })
+ 
+})
+
+//get all gouvernment
+router.get('/gouvernorat', function(req, res){
+    gouvernorat.find({},(err,data)=> {
         return res.send(data).status(200)
     });
  
 })
+//check all ville
+router.get('/ville', function(req, res){
+    ville.find().populate({path: "gouvernorat", select:"name"}).then(v=>{
+        res.json(v);
+    })
+ 
+})
+//get ville by gouvernorat
+router.post('/gouvernorat-id', function(req, res){
+    //  try{
+          var gouvId=req.body._id
+          try{
+            gouvernorat
+            .findOne({"_id": gouvId })
+            .populate("ville") // key to populate
+            .then(gouv => {
+               res.json(gouv); 
+            });
+
+  
+          }
+          catch(err){
+              console.log(err)
+          }
+  })
 
 
 module.exports = router ;

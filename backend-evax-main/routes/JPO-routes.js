@@ -16,7 +16,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 var nodemailer = require('nodemailer');
 
-const middlewares=require("../middleware/user-midlewares");
+
 const Centre = require("../model/vaccinationCentreSchema");
 
 
@@ -24,7 +24,7 @@ const SECRET_KEY=process.env.SECRET_KEY
 router.use(express.json())
 
 
-router.get('/jpo/userslist/',middlewares.isOperator, function(req, res){
+router.get('/jpo/userslist/', function(req, res){
     ConfirmationUsers.find({},(err,data)=> {
         console.log(data)
         return res.send(data).status(200)

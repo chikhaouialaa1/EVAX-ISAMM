@@ -7,8 +7,9 @@ vaccinationCentreSchema=mongoose.Schema({
     },
     gouvernement : {
         type: String,
-        required: true,
+        required: false,
     },
+    ville : { type: mongoose.Schema.Types.ObjectId, ref: 'ville' },
     manager: {
         type: String,
         required: false,

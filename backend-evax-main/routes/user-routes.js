@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 var nodemailer = require('nodemailer');
 
-const middlewares=require("../middleware/user-midlewares");
+
 const { find, findById } = require("../model/userSchema");
 const { response } = require("express");
 
@@ -126,7 +126,7 @@ try{
   }
 });
 
-router.post("/account/validation",middlewares.verifyjwt, async (req, res) => {
+router.post("/account/validation", async (req, res) => {
   const token = req.headers['authorization']
   dcodedToken = jwt.verify(token,process.env.SECRET_KEY);
   userid=dcodedToken.user_id
