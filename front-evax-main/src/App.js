@@ -12,6 +12,8 @@ import Home from './pages/Visitor/Home/Home'
 import Contact from './pages/Visitor/Contact/Contact'
 import Inscription from './pages/Authentication/Inscription/Inscription';
 import Login from './pages/Authentication/Login/Login';
+import { Provider } from 'react-redux';
+
 function App() {
   return (
     <Router>
