@@ -1,27 +1,27 @@
 const mongoose = require("mongoose");
 
-vaccinationCentreSchema=mongoose.Schema({
-    name : {
-        type: String,
-        required: true,
-    },
-    gouvernement : {
-        type: String,
-        required: true,
-    },
-    manager: {
-        type: String,
-        required: false,
-    },
-    capacity :  {
-        type : String
-    } ,
-    currentcapacity :  {
-        type : String
-    } ,
-    rendervous :  {
-        type : String
-    } 
-   })
+vaccinationCentreSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  government: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  manager: {
+    type: String,
+  },
+  capacity: {
+    type: String,
+  },
+});
 
-module.exports=centre=(mongoose.model('vaccinationcentreSchema', vaccinationCentreSchema));
+module.exports = centre = mongoose.model(
+  "vaccinationcentreSchema",
+  vaccinationCentreSchema
+);

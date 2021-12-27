@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 
 app.use(express.json())
 require('dotenv').config()
-
+app.use(bodyParser.urlencoded({ extended: true }))
 
 var dbconnect=require("./config/database")
 

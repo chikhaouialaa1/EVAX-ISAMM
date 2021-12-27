@@ -12,6 +12,7 @@ import Home from './pages/Visitor/Home/Home'
 import Contact from './pages/Visitor/Contact/Contact'
 import Inscription from './pages/Authentication/Inscription/Inscription';
 import Login from './pages/Authentication/Login/Login';
+import Citoyen from './components/Citoyen/Citoyen'
 import { Provider } from 'react-redux';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/centerDetail" element={<CenterDetail/>}/>
         <Route path="/home" element={<Home/>}/>
         <Route path="/contactUs" element={<Contact/>}/>
+        <Route path="/citoyen" element={<Citoyen/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>

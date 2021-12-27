@@ -2,12 +2,12 @@ import React from "react";
 export const NavbarData=[
     {
         title: 'Espace citoyen',
-        path:'/accueil',
+        path:'/citoyen',
         cName:'navbar-text-citoyen'
     },
     {
         title: 'Nous contacter',
-        path:'/accueil',
+        path:'/contactUs',
         cName:'navbar-text'
     },
     {
