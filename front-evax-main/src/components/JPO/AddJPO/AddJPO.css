@@ -1,0 +1,49 @@
+.add-JPO{
+    display: flex;
+    justify-content: center;
+}
+.form-JPO{
+    margin: 10px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+}
+.input-detail{
+    display: flex;
+}
+.input-jpo{
+    margin-right: 5px;
+}
+.add-jpo-btn{
+    width: fit-content;
+    justify-self: center;
+    align-self: center;
+    background-color: #FFBC6E;
+    border-radius: 25px;
+    border-color: #FFBC6E;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+.add-jpo-btn:hover{
+    width: fit-content;
+    justify-self: center;
+    align-self: center;
+    background-color: #FFBC6E;
+    border-radius: 25px;
+    border-color: #FFBC6E;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+.add-jpo-btn:focus{
+    width: fit-content;
+    justify-self: center;
+    align-self: center;
+    background-color: #FFBC6E;
+    border-radius: 25px;
+    border-color: #FFBC6E;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
