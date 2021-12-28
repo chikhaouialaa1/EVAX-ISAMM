@@ -28,7 +28,7 @@ function Contact() {
             background: "#F0F8FF",
           }}
         >
-          <input
+          <Input
           name="title"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -41,8 +41,8 @@ function Contact() {
               left: 60,
               background: "#FFFFF",
             }}
-          />
-          <button
+            />
+          <Button 
           onClick={() => dispatch(actions.addMsg({message}))}
             type="primary"
             shape="round"
@@ -52,9 +52,7 @@ function Contact() {
               paddingLeft: 5,
               marginTop: 270,
             }}
-          >
-            Envoyer
-          </button>
+            >Envoyer </Button>
         </Card>
 
         <Image

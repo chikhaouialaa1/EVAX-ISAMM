@@ -246,7 +246,6 @@ router.post(
   async(req,res)=>{
     try {
 
-    
     msg=new ContactSchema(
      req.body
     )

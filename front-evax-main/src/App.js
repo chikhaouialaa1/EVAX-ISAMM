@@ -26,7 +26,7 @@ function App() {
         <Route path="/jpo" element={<Jpo/>}/>
         <Route path="/addCenter" element={<AddCenter/>}/>
         <Route path="/centerDetail" element={<CenterDetail/>}/>
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/accueil" element={<Home/>}/>
         <Route path="/contactUs" element={<Contact/>}/>
         <Route path="/citoyen" element={<Citoyen/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
