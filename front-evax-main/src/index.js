@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider,applyMiddleware } from 'react-redux'
-
-import Strore from './store'
+import {configureStore} from './redux/store';
+const store = configureStore()
+console.log("store: ", store.getState())
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={Strore}>
+    <Provider store={store}>
          <App />
     </Provider>
   </React.StrictMode>,

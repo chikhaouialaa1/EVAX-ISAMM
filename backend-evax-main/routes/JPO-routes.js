@@ -89,3 +89,22 @@ catch{
 
 });
 
+//JPO routes (selon front)
+//create JPO
+router.post(
+    "/create-jpo",
+  
+    function (req, res) {
+      try {
+        var jpo = req.body;
+        console.log(centre);
+  
+        Centre.create(centre).then(() => {
+          return res.status(200).send("centre created successfully");
+        });
+      } catch {
+        return res.send("error").status(400);
+      }
+    }
+  );
+module.exports = router;

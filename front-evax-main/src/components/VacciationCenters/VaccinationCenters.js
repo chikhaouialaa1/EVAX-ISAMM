@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 function callback(key) {
   console.log(key);
 }
-function VaccinationCenters() {
+function VaccinationCenters({centers}) {
     return (
         <div className="vaccinationCenters">
             <AdminHeader/>
@@ -22,7 +22,7 @@ function VaccinationCenters() {
             <div className="centers">
             <Tabs defaultActiveKey="1" onChange={callback} className="tabs-center" centered="true" size="large" tabBarStyle={{backgroundColor:'transparent', color:"#2E4765"}}>
                 <TabPane tab="Centre de vaccination" key="1" className="centre"> 
-                        <Centers/>
+                        <Centers centersData = {centers}/>
                 </TabPane>
                 <TabPane tab="Pharmacie" key="2" className="centre">
                     
