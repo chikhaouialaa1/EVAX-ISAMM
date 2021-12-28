@@ -8,40 +8,28 @@ function onChange(value) {
     console.log(`selected ${value}`);
   }
   
-  function onBlur() {
-    console.log('blur');
-  }
-  
-  function onFocus() {
-    console.log('focus');
-  }
-  
-  function onSearch(val) {
-    console.log('search:', val);
-  }
-function AddCenterForm() {
-     
+function AddCenterForm({gouvernorat}) {
+    const options = gouvernorat.map((item, index)=>{
+      console.log(item);
+      return(
+        <Option value={item._id}>{item.name}</Option>
+      )
+    })
     return (
         <div className="addForm">
+          
             <h6>Nom Centre</h6>
             <Input placeholder="Entrer centre" className="input"/>
             <h6>Gouvernorat</h6>
             <Select
                 className="input"
-                showSearch
-                placeholder="Select a person"
-                optionFilterProp="children"
+                placeholder="Choisir gouvernorat"
                 onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
+                filterOption={false}
             >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
+              {options}
+                
+                
             </Select>
             <h6>Ville</h6>
             <Select
@@ -50,9 +38,6 @@ function AddCenterForm() {
                 placeholder="Select a person"
                 optionFilterProp="children"
                 onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
                 filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
