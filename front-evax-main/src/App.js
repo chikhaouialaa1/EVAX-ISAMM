@@ -13,7 +13,7 @@ import Contact from './pages/Visitor/Contact/Contact'
 import Inscription from './pages/Authentication/Inscription/Inscription';
 import Login from './pages/Authentication/Login/Login';
 import Citoyen from './components/Citoyen/Citoyen'
-import { Provider } from 'react-redux';
+
 
 function App() {
   return (
