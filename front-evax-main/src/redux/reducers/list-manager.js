@@ -1,5 +1,5 @@
 
-import { Mylist } from "../services/user-list"
+import { Mylist } from "../../services/user-list"
 
 //initiallist=Mylist
 

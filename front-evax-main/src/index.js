@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider,applyMiddleware } from 'react-redux'
+import { Provider } from "react-redux"
+import {configureStore} from './redux/store';
 
-import Strore from './store'
+const store = configureStore()
+console.log("store: ", store.getState())
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={Strore}>
-         <App />
+    <Provider store={store}>
+      <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
-);
+  document.getElementById("root")
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

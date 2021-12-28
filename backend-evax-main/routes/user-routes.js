@@ -14,6 +14,7 @@ var nodemailer = require("nodemailer");
 const middlewares = require("../middleware/user-midlewares");
 const { find, findById } = require("../model/userSchema");
 const { response } = require("express");
+const ContactSchema = require("../model/ContactSchema");
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -224,7 +225,7 @@ function emailSenderFunction(message, target) {
   });
 }
 //Send message
-router.post(
+/*router.post(
   "/newMessage",
 
   async function (req, res) {
@@ -233,13 +234,30 @@ router.post(
       console.log(msg);
 
       Message.create(msg).then(() => {
-        return res.status(200).send("message sent successfully");
+        return res.status(200).json("message sent successfully");
       });
     } catch {
-      return res.send("error").status(400);
+      return res.status(400).json("error");
     }
   }
-);
+);*/
+router.post(
+  "/newMessage",
+  async(req,res)=>{
+    try {
+
+    
+    msg=new ContactSchema(
+     req.body
+    )
+    msg.save()
+    res.json(msg) }
+    catch{
+      return res.status(400).json("error")
+    }
+  }
+  
+)
 
 
 

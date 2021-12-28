@@ -1,5 +1,5 @@
 //import { Mylist } from "../services/user-list"
-import AuthService from "../services/auth-Service"
+import AuthService from "../../services/auth-Service"
 
 
 

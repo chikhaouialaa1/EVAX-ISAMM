@@ -8,7 +8,7 @@ import AuthService from '../../../../src/services/auth-Service'
 import { useState } from 'react'    
 
 import { useDispatch } from "react-redux";
-import  authUser from "../../../actions/auth-user-action"
+import  authUser from "../../../redux/actions/auth-user-action"
 
 import {badpassword} from '../../../services/auth-Service'
 

@@ -7,6 +7,7 @@ app.use(cors({ origin: true }));
 const bodyParser = require("body-parser");
 
 app.use(express.json())
+
 require('dotenv').config()
 app.use(bodyParser.urlencoded({ extended: true }))
 

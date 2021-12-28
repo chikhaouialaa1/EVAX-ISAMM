@@ -1,11 +1,17 @@
 
-import React from "react";
-import { Card, Button, Input } from "antd";
+import React, { useState }from "react";
+import { Card, Button, Input, message } from "antd";
 import { Image } from "antd";
 import Navbar from "../../../components/Navar/Navbar";
 import "./Contact.css";
+import {useDispatch,useSelector} from "react-redux"
+import * as actions from '../../../redux/actions/Messages'
 
 function Contact() {
+  const [message, setMessage] = useState("");
+  const dispatch = useDispatch()
+
+
   return (
     <div>
       <Navbar />
@@ -22,7 +28,10 @@ function Contact() {
             background: "#F0F8FF",
           }}
         >
-          <Input
+          <input
+          name="title"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
             style={{
               paddingBottom: 200,
               width: 300,
@@ -33,7 +42,8 @@ function Contact() {
               background: "#FFFFF",
             }}
           />
-          <Button
+          <button
+          onClick={() => dispatch(actions.addMsg({message}))}
             type="primary"
             shape="round"
             style={{
@@ -44,7 +54,7 @@ function Contact() {
             }}
           >
             Envoyer
-          </Button>
+          </button>
         </Card>
 
         <Image
@@ -54,6 +64,7 @@ function Contact() {
           src="error"
           fallback="Group 2.png"
         />
+
       </div>
     </div>
   );
