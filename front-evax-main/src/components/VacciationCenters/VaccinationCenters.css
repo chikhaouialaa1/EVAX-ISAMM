@@ -1,7 +1,6 @@
 .vaccinationCenters{
     background-color: #F5F6FA;
     width: 100%;
-    height: 100vh;
     margin-left:300px;
     padding: 20px;
     border-radius: 30px;
@@ -57,11 +56,8 @@
 
 .centre{
     width: 60%;
-    background-color: white;
-    border-radius: 25px;
     align-self: center;
     justify-self: center;
-    display: flex;
     justify-content: center;
     align-content: center;
     padding: 10px;

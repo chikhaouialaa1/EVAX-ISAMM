@@ -35,3 +35,19 @@ export const deleteCenter = (id) => async (dispatch) => {
     id,
   })
 }
+export const fetchCenterById = (id) => async (dispatch) => {
+  const center = await api.fetchCenterById(id)
+  dispatch ( {
+    type: types.FETCH_CENTER_BY_ID,
+    center,
+  })
+}
+export const updateCenter = (id, center) => async (dispatch) => {
+  const updatedCenter = await api.updateCenter(id, center)
+
+  dispatch ( {
+    type: types.UPDATE_CENTER,
+    id,
+    center: updatedCenter,
+  })
+}

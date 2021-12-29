@@ -32,7 +32,7 @@ function App() {
         <Route path="/vaccin" element={<AdminSideBar/>}/>
         <Route path="/jpo" element={<Jpo/>}/>
         <Route path="/addCenter" element={<AddCenter/>}/>
-        <Route path="/centerDetail" element={<CenterDetail/>}/>
+        <Route path="/centerDetail/:id" element={<CenterDetail/>}/>
         <Route path="/home" element={<Home/>}/>
         <Route path="/contactUs" element={<Contact/>}/>
         <Route path="/citoyen" element={<Citoyen/>}/>

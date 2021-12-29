@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Centers.css'
 import 'antd/dist/antd.css';
 import {Link} from 'react-router-dom'
 import { Table, Button} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
+import CenterDescription from '../CenterDescription/CenterDescription';
 /*const dataSource = [
     {
       key: '1',
@@ -33,6 +34,7 @@ import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
   
   
 function Centers({centersData, delCenter}) {
+  
   const columns = [
     {
       title: 'Centre',
@@ -53,17 +55,18 @@ function Centers({centersData, delCenter}) {
       title: 'Action',
       key: 'action',
       render:(text, record, index)=>{
+        const id = record._id
         return(
           <>
-          <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} onClick = {
-          (e) => {
-            console.log("corresponding id is :", record._id)
-          }
-        }/>
+          
+          <Link to={"/centerDetail/"+id}>
+            <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} />
+          </Link>
           <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}
           onClick = {
             (e) => {
               delCenter(record._id)
+              console.log("corresponding id is :", record._id)
             }}/>
 
           </>
@@ -73,13 +76,17 @@ function Centers({centersData, delCenter}) {
     },
   ];
     return (
+      <>
         <div className="table">
           <Link to="/addCenter">
             <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter centre</Button>
           </Link>
           
-          <Table dataSource={centersData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>;
+          <Table dataSource={centersData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>
         </div>
+        
+        
+        </>
     )
 }
 

@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     errors: false,
     list: [],
+    selectedCenter:{},
   }
 
 const centers = (state = initialState, action) =>{
@@ -19,7 +20,18 @@ const centers = (state = initialState, action) =>{
             list:[...state.list, action.center]}
         case types.DELETE_CENTER:
             const newCenters = state.list.filter((center) => center._id !== action.id)
-      return { ...state, list: newCenters }
+            return { ...state, list: newCenters }
+        case types.FETCH_CENTER_BY_ID:
+            return{...state,
+            selectedCenter: action.center}
+        case types.UPDATE_CENTER:
+            const updatedCenters = state.list.map((center) => {
+                if (center._id === action.id) {
+                    return action.center
+                }
+                  return center
+                })
+                return { ...state, list: updatedCenters }
         default:
             return state
     }
