@@ -19,3 +19,19 @@ export const fetchCenters = () => async (dispatch) => {
        }
  
  }
+
+export const addCenter = (center) => async (dispatch) => {
+  const newCenter = await api.addCenter(center)
+
+  dispatch({
+    type: types.ADD_CENTER,
+    center: newCenter,
+  })
+}
+export const deleteCenter = (id) => async (dispatch) => {
+  await api.deleteCenter(id)
+  dispatch ( {
+    type: types.DELETE_CENTER,
+    id,
+  })
+}

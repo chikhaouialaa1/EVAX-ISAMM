@@ -21,6 +21,7 @@ function onChange(value) {
     console.log('search:', val);
   }
 function AddVolantaire() {
+  
     return (
         <div className='add-volontaire'>
             <h6>Nom et prenom</h6>
@@ -28,20 +29,12 @@ function AddVolantaire() {
             <h6>Gouvernorat</h6>
             <Select
                 className="input"
-                showSearch
-                placeholder="choisir gouvernorat"
-                optionFilterProp="children"
+                placeholder="Choisir gouvernorat"
                 onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
+                filterOption={false}
+                
             >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
+              
             </Select>
             <h6>Ville</h6>
             <Select

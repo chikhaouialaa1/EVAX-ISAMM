@@ -68,11 +68,11 @@ router.post(
 
 //delete centre
 router.post(
-  "/Vaccination-centre-del",
+  "/Vaccination-centre-del/id",
 
   function (req, res) {
     try {
-      var centreId = req.body._id;
+      var centreId = req.params.id;
       console.log(centreId);
       Centre.deleteOne(
         { _id: centreId },

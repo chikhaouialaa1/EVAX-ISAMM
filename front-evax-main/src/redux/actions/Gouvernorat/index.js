@@ -19,3 +19,30 @@ export const fetchGov = () => async (dispatch) => {
        }
  
  }
+ export const fetchVille = (idGov) => async (dispatch) => {
+  dispatch({
+    type: types.FETCH_VILLE_REQUEST,
+    
+  })
+  
+  function filterByID(item) {
+    if (item.gouvernorat._id ==idGov) {
+      return true
+    }
+    return false;
+  }
+     try {
+       const villes = await api.getVille()
+
+       let ville = villes.filter(filterByID)
+        dispatch({
+          type: types.FETCH_VILLE_SUCCESS,
+          ville,
+        })
+     } catch (e) {
+      dispatch({
+        type: types.FETCH_VILLE_FAILURE,
+      })
+     }
+
+}
