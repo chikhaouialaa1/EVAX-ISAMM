@@ -26,10 +26,9 @@ function AddCenter() {
             <div className="content">
                 <AdminHeader/>
                 <div className="form">
-                {gouvernorat.loading  && <div>Loading ... </div>}
-                {!gouvernorat.loading && isVisible &&(
-                    <AddCenterForm gouvernorat ={gouvernorat.listGovs}/>
-                    )} 
+                    <AddCenterForm gouvernorat ={gouvernorat}
+                    />
+                    
                 </div>
             </div>
         </div>

@@ -18,6 +18,14 @@ export const addCenter = async (center) => {
     )
     return result.data
   }
+ export const deleteCenter = async (id) => {
+    console.log(id)
+      const result = await Axios.post(
+        "http://localhost:4000/Vaccination-centre-del/"+id
+      )
+      
+      return result.data
+    }
 
 //gouvernorat
 export const getGouvernorat= async () => {
@@ -25,6 +33,15 @@ export const getGouvernorat= async () => {
 
     const result = await Axios.get(
         "http://localhost:4000/gouvernorat"
+    )
+    return result.data
+  }
+//ville
+export const getVille= async () => {
+    //await delay(1000)
+
+    const result = await Axios.get(
+        "http://localhost:4000/ville"
     )
     return result.data
   }
