@@ -1,25 +1,26 @@
 import React from 'react'
+import './AddVolontaire.css'
 import {Input, Button, Select } from 'antd';
 import 'antd/dist/antd.css';
-import './AddCenterFrom.css'
+
 const { Option } = Select;
 
 function onChange(value) {
     console.log(`selected ${value}`);
   }
   
-function AddCenterForm({gouvernorat}) {
-    const options = gouvernorat.map((item, index)=>{
-      console.log(item);
-      return(
-        <Option value={item._id}>{item.name}</Option>
-      )
-    })
+
+function AddVolantaire({gouv2}) {
+  const options= gouv2.map((item, index)=>{
+    console.log(item);
+    return(
+      <Option value={item._id}>{item.name}</Option>
+    )
+  })
     return (
-        <div className="addForm">
-          
-            <h6>Nom Centre</h6>
-            <Input placeholder="Entrer centre" className="input"/>
+        <div className='add-volontaire'>
+            <h6>Nom et prenom</h6>
+            <Input placeholder="Donner nom et prénom" className="input"/>
             <h6>Gouvernorat</h6>
             <Select
                 className="input"
@@ -28,16 +29,17 @@ function AddCenterForm({gouvernorat}) {
                 filterOption={false}
             >
               {options}
-                
+
                 
             </Select>
             <h6>Ville</h6>
             <Select
                 className="input"
                 showSearch
-                placeholder="Select a person"
+                placeholder="choisir ville"
                 optionFilterProp="children"
                 onChange={onChange}
+              
                 filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
@@ -46,13 +48,13 @@ function AddCenterForm({gouvernorat}) {
                 <Option value="lucy">Lucy</Option>
                 <Option value="tom">Tom</Option>
             </Select>
-            <h6>Responsable</h6>
-            <Input placeholder="Entrer centre" className="input"/>
-            <h6>Capacité</h6>
-            <Input placeholder="Entrer capacité du centre pour chaque 1/2 heure" className="input"/>
-            <Button className="button">Ajouter Centre</Button>
+            <h6>Email</h6>
+            <Input placeholder="Entrer email" className="input"/>
+            <h6>Mot de passe</h6>
+            <Input placeholder="Entrer mot de passe" className="input"/>
+            <Button className="button">Ajouter</Button>
         </div>
     )
 }
 
-export default AddCenterForm
+export default AddVolantaire

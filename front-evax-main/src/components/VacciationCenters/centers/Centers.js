@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import {Link} from 'react-router-dom'
 import { Table, Button} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
-const dataSource = [
+/*const dataSource = [
     {
       key: '1',
       center: 'Maison jeune',
@@ -29,18 +29,18 @@ const dataSource = [
       capacity: 10,
       location:'Tunis'
     },
-  ];
+  ];*/
   
   const columns = [
     {
       title: 'Centre',
-      dataIndex: 'center',
-      key: 'center',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
       title: 'Localisation',
-      dataIndex: 'location',
-      key: 'location',
+      dataIndex: 'ville',
+      key: 'ville',
     },
     {
       title: 'Nombre max 1/2',
@@ -63,7 +63,7 @@ const dataSource = [
 
     },
   ];
-function Centers() {
+function Centers({centersData}) {
 
     return (
         <div className="table">
@@ -71,7 +71,7 @@ function Centers() {
             <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter centre</Button>
           </Link>
           
-          <Table dataSource={dataSource} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>;
+          <Table dataSource={centersData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>;
         </div>
     )
 }

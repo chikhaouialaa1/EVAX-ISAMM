@@ -9,6 +9,7 @@ const Centre = require("../model/vaccinationCentreSchema");
 const gouvernorat = require("../model/gouvernoratSchema");
 const ville = require("../model/ville")
 const Operator = require("../model/OperatorSchema");
+const volontaire = require("../model/VolontaireSchema")
 
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -155,5 +156,104 @@ router.get("/Messages", function (req, res) {
     return res.send(data).status(200);
   });
 });
+//gestion volontaire
+//new volontaire
+router.post(
+  "/new-volontaire",
 
+  async function (req, res) {
+    try {
+      const { username, email, password, role, gouvernorat, ville, centre } =
+      req.body;
+      encryptedPassword = await bcrypt.hash(password, 10);
+      const vol = await volontaire.create({
+        username, email:email.toLowerCase(), password: encryptedPassword, role, gouvernorat, ville, centre
+      })
+        return res.status(200).send("volontaire created successfully");
+      
+    } catch {
+      return res.send("error").status(400);
+    }
+  }
+);
+//get all volontaire
+router.get("/volontaire", function (req, res) {
+  volontaire.find()
+    .then((vol) => {
+      res.json(vol);
+    });
+});
+
+// get by id
+router.post("/volontaire-id", function (req, res) {
+  
+  var volontaireID = req.body._id;
+  try {
+    volontaire.find({ _id: volontaireID }, (err, data) => {
+      if (err) {
+        return res.send("error").status(404);
+      }
+      console.log(data);
+      return res.send(data).status(200);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+// delete volontaire
+router.post(
+  "/volontaire-delete",
+
+  function (req, res) {
+    try {
+      var volontaireID = req.body._id;
+      volontaire.deleteOne(
+        { _id: volontaireID},
+        () => {
+          return res.send("volontaire " + volontaireID + "deleted successfully");
+        },
+        (err) => {
+          if (err) console.log(err);
+          return res.send({ message: "error :" + err });
+        }
+      );
+    } catch {
+      return res.send("error").status(400);
+    }
+  }
+);
+
+//update
+router.post(
+  "/volontaire-update",
+
+  function (req, res) {
+    try {
+      var volontaireID = req.body._id;
+      const { username, email, password, role, gouvernorat, ville, centre } =
+      req.body;
+      
+      volontaire.updateOne(
+        { _id: volontaireID},
+        {
+          username: username,
+          email:email,
+          password:password,
+          role:role,
+          gouvernorat:gouvernorat,
+          ville:ville,
+          centre:centre
+
+        },
+        res.send("volontaire updated successfully").status(200),
+        (err) => {
+          if (err) console.log(err);
+          return res.send({ message: "error :" + err });
+        }
+      );
+    } catch {
+      return res.send("error").status(400);
+    }
+  }
+);
 module.exports = router;

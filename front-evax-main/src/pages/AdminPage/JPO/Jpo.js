@@ -1,11 +1,12 @@
 import React from 'react'
 import AdminSideBar from '../../../components/AdminSideBar/AdminSideBar'
+import JpoList from '../../../components/JPO/JpoList'
 
 function Jpo() {
     return (
-        <div>
+        <div className='jpo-content'>
             <AdminSideBar/>
-            <h1>JPO</h1>
+            <JpoList/>
         </div>
     )
 }

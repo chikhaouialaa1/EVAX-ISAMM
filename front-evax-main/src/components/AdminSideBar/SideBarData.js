@@ -6,6 +6,7 @@ import {
   CarryOutOutlined,
   ShopOutlined,
   CommentOutlined,
+  UsergroupAddOutlined 
 } from "@ant-design/icons";
 export const SideBarData = [
   {
@@ -36,6 +37,12 @@ export const SideBarData = [
     title: "Journées portes ouvertes",
     path: "/jpo",
     icon: <CarryOutOutlined />,
+    cName: "nav-text",
+  },
+  {
+    title: "Volontaire",
+    path: "/volontaire",
+    icon: <UsergroupAddOutlined />,
     cName: "nav-text",
   },
   {

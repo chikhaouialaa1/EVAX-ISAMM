@@ -14,6 +14,13 @@ import Inscription from './pages/Authentication/Inscription/Inscription';
 import Login from './pages/Authentication/Login/Login';
 import Citoyen from './components/Citoyen/Citoyen'
 
+import { Provider } from 'react-redux';
+import JpoDetail from './pages/AdminPage/JPO/JpoDetail/JpoDetail';
+import Volontaire from './pages/AdminPage/Volontaire/Volontaire';
+import VolontaireDetail from './pages/AdminPage/Volontaire/VolantaireDetail/VolontaireDetail';
+
+
+
 
 function App() {
   return (
@@ -31,6 +38,9 @@ function App() {
         <Route path="/citoyen" element={<Citoyen/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/jpoDetail" element={<JpoDetail/>}/>
+        <Route path="/volontaire" element={<Volontaire/>}/>
+        <Route path="/volontaireDetail" element={<VolontaireDetail/>}/>
       </Routes>
     </Router>
       
