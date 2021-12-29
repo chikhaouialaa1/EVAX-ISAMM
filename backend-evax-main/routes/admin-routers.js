@@ -45,14 +45,14 @@ router.post(
   function (req, res) {
     try {
       var centreId = req.body._id;
-      const { name, gouvernement, manager } = req.body;
+      const { name,  manager, capacity } = req.body;
       console.log(centreId);
       Centre.updateOne(
         { _id: centreId },
         {
           name: name,
-          gouvernement: gouvernement,
           manager: manager,
+          capacity:capacity
         },
         res.send("centre updated successfully").status(200),
         (err) => {
@@ -68,7 +68,7 @@ router.post(
 
 //delete centre
 router.post(
-  "/Vaccination-centre-del/id",
+  "/Vaccination-centre-del/:id",
 
   function (req, res) {
     try {
@@ -92,9 +92,9 @@ router.post(
 );
 
 //check specific centre
-router.post("/Vaccination-centre-id", function (req, res) {
+router.get("/Vaccination-centre-id/:id", function (req, res) {
   //  try{
-  var centreId = req.body._id;
+  var centreId = req.params.id;
   console.log(centreId);
   try {
     Centre.find({ _id: centreId }, (err, data) => {

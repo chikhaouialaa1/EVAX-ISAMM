@@ -1,8 +1,10 @@
-import React , { useState }from 'react'
+import React , { useState, useEffect }from 'react'
 import { Button, Descriptions, Table, Drawer, SpaceInput, Select, Input, Space} from 'antd';
 import 'antd/dist/antd.css';
 import './CenterDescription.css'
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
+import { useDispatch, useSelector } from "react-redux"
+import * as actions from '../../../redux/actions/Centres/index'
 
 const { Option } = Select;
 function onChange(value) {
@@ -54,8 +56,12 @@ const dataSource = [
     },
     
   ];
-function CenterDescription() {
+function CenterDescription({centerDescription, updateCenter}) {
   const [visible, setVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [manager, setManager] = useState("");
+  const [capacity, setCapacity] = useState("");
+  
     return (
         <div>
             <Button type="dashed" ghost danger style={{position:'absolute', top:'60px', right:'10px', paddingRight:'20px'}} onClick={() => setVisible(true)}><EditOutlined style={{ fontSize: '16px'}} danger/>Editer</Button>
@@ -75,55 +81,27 @@ function CenterDescription() {
               }
             >
               <h6>Nom Centre</h6>
-              <Input placeholder="Entrer centre" className="input"/>
-              <h6>Gouvernorat</h6>
-              <Select
-                  className="input"
-                  showSearch
-                  placeholder="Select a person"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  onSearch={onSearch}
-                  filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-              >
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
-              </Select>
-              <h6>Ville</h6>
-              <Select
-                  className="input"
-                  showSearch
-                  placeholder="Select a person"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  onSearch={onSearch}
-                  filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-              >
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
-              </Select>
+              <Input placeholder="Entrer centre" className="input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}/>
               <h6>Responsable</h6>
-              <Input placeholder="Entrer centre" className="input"/>
+              <Input placeholder="Entrer centre" className="input"
+              value={manager}
+              onChange={(e) => setManager(e.target.value)}/>
+              <h6>Capacité</h6>
+              <Input placeholder="Entrer centre" className="input"
+              value={capacity}
+              onChange={(e) => setCapacity(e.target.value)}/>
               
             </Drawer>
             <h5 style={{color:"#ABABFD", marginTop:"25px", fontSize:'20px'}}>Détails</h5>
             <Descriptions layout="vertical" labelStyle={{color:"#2E4765", fontWeight:'bold'}} >
-                <Descriptions.Item label="Nom centre" >Maison jeune</Descriptions.Item>
-                <Descriptions.Item label="Gouvernorat">Tunis</Descriptions.Item>
-                <Descriptions.Item label="Ville">Tunis</Descriptions.Item>
-                <Descriptions.Item label="Responsable">Mohamed Salah</Descriptions.Item>
-                <Descriptions.Item label="Nombre max 1/2">10</Descriptions.Item>
+                <Descriptions.Item label="Nom centre" >{centerDescription.name}</Descriptions.Item>
+                <Descriptions.Item label="Ville"></Descriptions.Item>
+                <Descriptions.Item label="Responsable">{centerDescription.manager}</Descriptions.Item>
+                <Descriptions.Item label="Nombre max 1/2">{centerDescription.capacity}</Descriptions.Item>
             </Descriptions>
+            
             <div className="moreinfo">
                 <div>
                     <h5 style={{color:"#FFBC6E", marginTop:"25px", fontSize:'20px'}}>Stock en vaccin</h5>
