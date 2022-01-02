@@ -9,13 +9,12 @@ vaccinesSchema=mongoose.Schema({
         type: Number,
         required: true,
     },
-    date: {
+    centerID : {
         type: String,
-        required: false,
-    },
-    expirationdate: {
+        required: true,
+    }, vaccinID : {
         type: String,
-        default:"-"
+        required: true,
     }
 })
 

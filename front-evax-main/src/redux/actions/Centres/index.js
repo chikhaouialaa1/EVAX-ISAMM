@@ -42,6 +42,13 @@ export const fetchCenterById = (id) => async (dispatch) => {
     center,
   })
 }
+export const fetchCenterVaccinById = (id) => async (dispatch) => {
+  const center = await api.fetchCenterVaccinById(id)
+  dispatch ( {
+    type: types.FETCH_CENTER_VACCIN_BY_ID,
+    center,
+  })
+}
 export const updateCenter = (id, center) => async (dispatch) => {
   const updatedCenter = await api.updateCenter(id, center)
 
