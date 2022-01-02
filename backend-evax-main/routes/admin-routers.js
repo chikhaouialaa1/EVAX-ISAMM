@@ -345,25 +345,44 @@ router.post("/Vaccin-id/:id", function (req, res) {
 
 router.post("/VaccinCenter", function (req, res) {
   let name="";
-  Vaccine.find({ _id: req.body.vaccin }, (err, data) => {
+  Vaccine.find({ _id: req.body.vaccin }, (err, data1) => {
     if (err) {
      console.log(err)
     }else{
-      name=data[0].vaccineName
-      console.log(name)
-      const vaccin = new VaccinesSchema({
-        centerID:req.body.id,
-        vaccinID:req.body.vaccin,
-        vaccineName : name ,
-        quantity:  req.body.quantity  
-    });
-    console.log(vaccin)
-    vaccin.save(function(err, user) {
-      console.log(err)
-        if (err) return res.json(err);
-       console.log(user)
-        return res.send(user).status(200);
-    });
+
+      VaccinesSchema.findOne({ centerID:req.body.id, vaccinID:req.body.vaccin}, (err, data) => {
+        if (!data) {
+          name=data1[0].vaccineName
+          console.log(name)
+          const vaccin = new VaccinesSchema({
+            centerID:req.body.id,
+            vaccinID:req.body.vaccin,
+            vaccineName : name ,
+            quantity:  req.body.quantity  
+        });
+        console.log(vaccin)
+        vaccin.save(function(err, user) {
+          console.log(err)
+            if (err) return res.json(err);
+           console.log(user)
+            return res.send(user).status(200);
+        });
+        }else{
+          data.quantity=Number(data.quantity)+ Number(req.body.quantity)  
+          VaccinesSchema.findOneAndUpdate({centerID:req.body.id, vaccinID:req.body.vaccin  },
+            data,
+             { new: true },
+             (err, contact) => {
+             if (err) {
+               console.log(err)
+               res.status(400).json(err);
+             }
+             console.log(data.quantity)
+             return res.send(data).status(200);
+         });
+        }
+      });
+     
      
     }
     });
