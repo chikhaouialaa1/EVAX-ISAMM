@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {HomeOutlined} from '@ant-design/icons';
 import {SideBarData} from './SideBarData'
 import './AdminSideBar.css'
+import { useLocation } from "react-router-dom";
+import ReactGa from 'react-ga'
 function AdminSideBar() {
+    
+  useEffect(()=>{
+    ReactGa.initialize('UA-216118120-1')
+    ReactGa.pageview(window.location.pathname + window.location.search)
+    console.log("teeeeeeeeeest")
+  }, []);
+  
+  
     return (
         <div className="navbar">
             <div >

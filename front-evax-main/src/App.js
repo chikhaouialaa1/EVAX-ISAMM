@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import React, { useEffect }from "react";
 import './App.css';
 import { BrowserRouter as Router , Routes ,Route } from 'react-router-dom';
 import Dashboard from './pages/AdminPage/Dashboard/Dashboard';
@@ -18,11 +19,12 @@ import { Provider } from 'react-redux';
 import JpoDetail from './pages/AdminPage/JPO/JpoDetail/JpoDetail';
 import Volontaire from './pages/AdminPage/Volontaire/Volontaire';
 import VolontaireDetail from './pages/AdminPage/Volontaire/VolantaireDetail/VolontaireDetail';
-
+ import ReactGa from 'react-ga'
 
 
 
 function App() {
+  
   return (
     <Router>
       <Routes>
