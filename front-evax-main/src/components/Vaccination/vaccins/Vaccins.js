@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import {Link} from 'react-router-dom'
 import { Table, Button} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
-import CenterDescription from '../CenterDescription/CenterDescription';
+import CenterDescription from '../VaccinDescription/CenterDescription';
 /*const dataSource = [
     {
       key: '1',
@@ -34,24 +34,14 @@ import CenterDescription from '../CenterDescription/CenterDescription';
   
   
 function Centers({centersData, delCenter}) {
-  localStorage.setItem("reloadCount", 1)
-
+  
   const columns = [
     {
-      title: 'Centre',
-      dataIndex: 'name',
+      title: 'Vaccin',
+      dataIndex: 'vaccineName',
       key: 'name',
     },
-    {
-      title: 'Localisation',
-      dataIndex: 'ville',
-      key: 'ville',
-    },
-    {
-      title: 'Nombre max 1/2',
-      dataIndex: 'capacity',
-      key: 'capacity',
-    },
+    
     {
       title: 'Action',
       key: 'action',
@@ -60,7 +50,7 @@ function Centers({centersData, delCenter}) {
         return(
           <>
           
-          <Link to={"/centerDetail/"+id}>
+          <Link to={"/vaccinDetail/"+id}>
             <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} />
           </Link>
           <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}
@@ -79,8 +69,8 @@ function Centers({centersData, delCenter}) {
     return (
       <>
         <div className="table">
-          <Link to="/addCenter">
-            <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter centre</Button>
+          <Link to="/addVaccin">
+            <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter Vaccin</Button>
           </Link>
           
           <Table dataSource={centersData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>

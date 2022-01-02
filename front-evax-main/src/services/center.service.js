@@ -32,6 +32,13 @@ export const fetchCenterById = async (id) => {
       )
       return result.data
     }
+    export const fetchCenterVaccinById = async (id) => {
+      const result = await Axios.get(
+        "http://localhost:4000/Vaacin-stock/"+id
+      )
+      console.log("wwwwwwwwwwwwwwww",result)
+      return result.data
+    }
 export const updateCenter = async (_id, center) => {
       const result = await Axios.post(
         "http://localhost:4000/Vaccination-centre-updated",{_id, center} 

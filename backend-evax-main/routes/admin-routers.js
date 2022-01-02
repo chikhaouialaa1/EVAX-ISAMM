@@ -3,6 +3,7 @@ const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
 const ConfirmationUsers = require("../model/confirmedUsersSchema");
 const VaccinesSchema = require("../model/VaccinesSchema");
+const Vaccine = require("../model/Vaccine");
 
 const Message = require("../model/ContactSchema");
 const Centre = require("../model/vaccinationCentreSchema");
@@ -17,6 +18,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 var nodemailer = require("nodemailer");
 const middlewares = require("../middleware/user-midlewares");
+const vaccinationCentreSchema = require("../model/vaccinationCentreSchema");
 const SECRET_KEY = process.env.SECRET_KEY;
 router.use(express.json());
 
@@ -26,12 +28,25 @@ router.post(
 
   function (req, res) {
     try {
-      var centre = req.body;
+      const centre = new Centre({
+        name : req.body.name,  
+        ville : req.body.ville,        
+        manager : req.body.manager,        
+        capacity : req.body.capacity,        
+      
+    });
+    
+    
       console.log(centre);
-
-      Centre.create(centre).then(() => {
-        return res.status(200).send("centre created successfully");
-      });
+      centre.save(function(err, user) {
+        console.log(err)
+          if (err) return res.json(err);
+         
+         res.status(200).send("centre added successfully");
+    
+        });
+     
+    
     } catch {
       return res.send("error").status(400);
     }
@@ -256,4 +271,148 @@ router.post(
     }
   }
 );
+
+router.post('/Vaccin', function(req, res){
+  const vaccin = new Vaccine({
+    vaccineName : req.body.vaccineName        
+});
+
+console.log(vaccin);
+vaccin.save(function(err, user) {
+  console.log(err)
+    if (err) return res.json(err);
+   
+    return res.send(user).status(200);
+});
+})
+
+router.post('/Add_Vaccin', function(req, res){
+  const vaccin = new VaccinesSchema({
+    vaccineName : req.body.vaccineName        
+});
+
+console.log(vaccin);
+vaccin.save(function(err, user) {
+  console.log(err)
+    if (err) return res.json(err);
+   
+    return res.send(user).status(200);
+});
+})
+router.get("/vaccins", function (req, res) {
+  Vaccine.find({}, (err, data) => {
+    return res.send(data).status(200);
+  });
+});
+
+
+//check specific centre
+router.get("/Vaacin-id/:id", function (req, res) {
+  //  try{
+  var centreId = req.params.id;
+  console.log(centreId);
+  try {
+    Vaccine.find({ _id: centreId }, (err, data) => {
+      if (err) {
+        return res.send("error").status(404);
+      }
+      console.log(data);
+      return res.send(data).status(200);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+router.post("/Vaccin-id/:id", function (req, res) {
+  //  try{
+  var centreId = req.params.id;
+  const vaccin = new Vaccine({
+    _id:centreId,
+    vaccineName : req.body.Vaccin.vaccineName      
+});
+
+  console.log(req.body.Vaccin.vaccineName  );
+  Vaccine.findOneAndUpdate({_id:centreId  },
+    vaccin,
+     { new: true },
+     (err, contact) => {
+     if (err) {
+       console.log(err)
+       res.status(400).json(err);
+     }
+ });
+});
+
+router.post("/VaccinCenter", function (req, res) {
+  let name="";
+  Vaccine.find({ _id: req.body.vaccin }, (err, data) => {
+    if (err) {
+     console.log(err)
+    }else{
+      name=data[0].vaccineName
+      console.log(name)
+      const vaccin = new VaccinesSchema({
+        centerID:req.body.id,
+        vaccinID:req.body.vaccin,
+        vaccineName : name ,
+        quantity:  req.body.quantity  
+    });
+    console.log(vaccin)
+    vaccin.save(function(err, user) {
+      console.log(err)
+        if (err) return res.json(err);
+       console.log(user)
+        return res.send(user).status(200);
+    });
+     
+    }
+    });
+ 
+  
+ });
+
+ router.get("/Vaacin-stock/:id", function (req, res) {
+  //  try{
+  var centreId = req.params.id;
+  console.log(centreId+"aaaaaaaaaaaaaaaaa");
+  try {
+    VaccinesSchema.find({ centerID: centreId }, (err, data) => {
+      if (err) {
+        return res.send("error").status(404);
+      }
+      console.log("ddddddddddddddddddd");
+      console.log(data)
+      console.log("ddddddddddddddddddd");
+
+      return res.send(data).status(200);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post(
+  "/Vaccin-del/:id",
+
+  function (req, res) {
+    try {
+      var centreId = req.params.id;
+      console.log(centreId);
+      Vaccine.deleteOne(
+        { _id: centreId },
+        () => {
+          console.log(centreId);
+          return res.send("vaccin" + centreId + "deleted successfully");
+        },
+        (err) => {
+          if (err) console.log(err);
+          return res.send({ message: "error :" + err });
+        }
+      );
+    } catch {
+      return res.send("error").status(400);
+    }
+  }
+);
+
 module.exports = router;

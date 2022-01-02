@@ -5,6 +5,8 @@ import './AddCenterFrom.css'
 import { useDispatch, useSelector } from "react-redux"
 import * as govActions from '../../../redux/actions/Gouvernorat/index'
 import * as centerActions from '../../../redux/actions/Centres/index'
+import {Link} from 'react-router-dom'
+
 const { Option } = Select;
 
   
@@ -26,6 +28,7 @@ function AddCenterForm({gouvernorat}) {
     setVille("")
     setManager("")
     setCapacity("")
+    
   }
   
     const options = gouvernorat.listGovs.map((item, index)=>{
@@ -40,6 +43,9 @@ function AddCenterForm({gouvernorat}) {
         <Option value={item._id}>{item.name}</Option>
       )
     })
+  /*  <Link to={"/addCenter/"+id}>
+    <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter centre</Button>
+  </Link>*/
     return (
         <div className="addForm">
           

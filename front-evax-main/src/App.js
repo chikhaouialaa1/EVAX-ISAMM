@@ -8,7 +8,12 @@ import RendezVous from './pages/AdminPage/RendezVous/RendezVous'
 import AdminSideBar from './pages/AdminPage/Vaccin/Vaccin'
 import Jpo from './pages/AdminPage/JPO/Jpo'
 import AddCenter from './pages/AdminPage/VaccinationCenter/AddCenter/AddCenter';
+import AddVaccin from './pages/AdminPage/Vaccin/AddCenter/AddCenter';
+import AddCenterVaccin from './pages/AdminPage/VaccinationCenter/AddCenter/AddCenterVaccin';
+
 import CenterDetail from './pages/AdminPage/VaccinationCenter/CenterDetail/CenterDetail';
+import VaccinDetail from './pages/AdminPage/Vaccin/CenterDetail/CenterDetail';
+
 import Home from './pages/Visitor/Home/Home'
 import Contact from './pages/Visitor/Contact/Contact'
 import Inscription from './pages/Authentication/Inscription/Inscription';
@@ -34,6 +39,11 @@ function App() {
         <Route path="/vaccin" element={<AdminSideBar/>}/>
         <Route path="/jpo" element={<Jpo/>}/>
         <Route path="/addCenter" element={<AddCenter/>}/>
+        <Route path="/addCenter/:id" element={<AddCenterVaccin/>}/>
+
+        <Route path="/addVaccin" element={<AddVaccin/>}/>
+        <Route path="/vaccinDetail/:id" element={<VaccinDetail/>}/>
+
         <Route path="/centerDetail/:id" element={<CenterDetail/>}/>
         <Route path="/home" element={<Home/>}/>
         <Route path="/contactUs" element={<Contact/>}/>
