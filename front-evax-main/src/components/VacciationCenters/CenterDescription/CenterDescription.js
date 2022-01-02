@@ -5,6 +5,7 @@ import './CenterDescription.css'
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux"
 import * as actions from '../../../redux/actions/Centres/index'
+import {Link} from 'react-router-dom'
 
 const { Option } = Select;
 function onChange(value) {
@@ -22,41 +23,23 @@ function onFocus() {
 function onSearch(val) {
   console.log('search:', val);
 }
-const dataSource = [
-    {
-      key: '1',
-      center: 'Maison jeune',
-      vaccin: 'Pfizer',
-      total:10
-    },
-    {
-        key: '2',
-        center: 'Maison jeune',
-        vaccin: 'Pfizer',
-        total:10
-      },
-      {
-        key: '3',
-        center: 'Maison jeune',
-        vaccin: 'Pfizer',
-        total:10
-      },
-  ];
-  
   const columns = [
     {
       title: 'Vaccin',
-      dataIndex: 'vaccin',
+      dataIndex: 'vaccineName',
       key: 'vaccin',
     },
     {
       title: 'Total',
-      dataIndex: 'total',
+      dataIndex: 'quantity',
       key: 'total',
     },
     
   ];
-function CenterDescription({centerDescription, updateCenter}) {
+function CenterDescription({centerDescription,vaccins, updateCenter}) {
+  
+console.log(vaccins[0])
+  
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("");
   const [manager, setManager] = useState("");
@@ -65,6 +48,9 @@ function CenterDescription({centerDescription, updateCenter}) {
     return (
         <div>
             <Button type="dashed" ghost danger style={{position:'absolute', top:'60px', right:'10px', paddingRight:'20px'}} onClick={() => setVisible(true)}><EditOutlined style={{ fontSize: '16px'}} danger/>Editer</Button>
+            <Link to={"/addCenter/"+centerDescription._id}>
+            <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} />Add Vaccin
+          </Link>
             <Drawer
               title="Editer centre"
               width={520}
@@ -80,6 +66,7 @@ function CenterDescription({centerDescription, updateCenter}) {
                 </Space>
               }
             >
+               
               <h6>Nom Centre</h6>
               <Input placeholder="Entrer centre" className="input"
               value={name}
@@ -105,7 +92,7 @@ function CenterDescription({centerDescription, updateCenter}) {
             <div className="moreinfo">
                 <div>
                     <h5 style={{color:"#FFBC6E", marginTop:"25px", fontSize:'20px'}}>Stock en vaccin</h5>
-                    <Table dataSource={dataSource} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>;
+                    <Table dataSource={vaccins[0]} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>;
                 </div>
                 <div>
                     <h5 style={{color:"#84E0BE", marginTop:"25px", fontSize:'20px'}}>Nombre des rendez-vous aujourd'hui</h5>

@@ -28,12 +28,25 @@ router.post(
 
   function (req, res) {
     try {
-      var centre = req.body;
+      const centre = new Centre({
+        name : req.body.name,  
+        ville : req.body.ville,        
+        manager : req.body.manager,        
+        capacity : req.body.capacity,        
+      
+    });
+    
+    
       console.log(centre);
-
-      Centre.create(centre).then(() => {
-        return res.status(200).send("centre created successfully");
-      });
+      centre.save(function(err, user) {
+        console.log(err)
+          if (err) return res.json(err);
+         
+         res.status(200).send("centre added successfully");
+    
+        });
+     
+    
     } catch {
       return res.send("error").status(400);
     }
@@ -330,6 +343,53 @@ router.post("/Vaccin-id/:id", function (req, res) {
  });
 });
 
+router.post("/VaccinCenter", function (req, res) {
+  let name="";
+  Vaccine.find({ _id: req.body.vaccin }, (err, data) => {
+    if (err) {
+     console.log(err)
+    }else{
+      name=data[0].vaccineName
+      console.log(name)
+      const vaccin = new VaccinesSchema({
+        centerID:req.body.id,
+        vaccinID:req.body.vaccin,
+        vaccineName : name ,
+        quantity:  req.body.quantity  
+    });
+    console.log(vaccin)
+    vaccin.save(function(err, user) {
+      console.log(err)
+        if (err) return res.json(err);
+       console.log(user)
+        return res.send(user).status(200);
+    });
+     
+    }
+    });
+ 
+  
+ });
+
+ router.get("/Vaacin-stock/:id", function (req, res) {
+  //  try{
+  var centreId = req.params.id;
+  console.log(centreId+"aaaaaaaaaaaaaaaaa");
+  try {
+    VaccinesSchema.find({ centerID: centreId }, (err, data) => {
+      if (err) {
+        return res.send("error").status(404);
+      }
+      console.log("ddddddddddddddddddd");
+      console.log(data)
+      console.log("ddddddddddddddddddd");
+
+      return res.send(data).status(200);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 router.post(
   "/Vaccin-del/:id",

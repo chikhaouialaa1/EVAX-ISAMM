@@ -9,6 +9,10 @@ const initialState = {
 
 const centers = (state = initialState, action) =>{
     switch(action.type){
+        case types.FETCH_CENTER_VACCIN_BY_ID:{
+            return{...state,
+                list:[...state.list, action.center]}
+        }
         case types.FETCH_CENTER_REQUEST:
             return { ...state, loading: true, error: true }
         case types.FETCH_CENTER_SUCCESS:

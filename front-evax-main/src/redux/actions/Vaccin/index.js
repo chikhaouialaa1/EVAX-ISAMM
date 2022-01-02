@@ -51,3 +51,12 @@ export const updateVaccin = (id, vaccin) => async (dispatch) => {
     vaccin: updatedVaccin,
   })
 }
+
+export const addCenterVaccin = (vaccin) => async (dispatch) => {
+  const newVaccin = await api.addCenterVaccin(vaccin)
+
+  dispatch({
+    type: types.ADD_CENTER_VACCIN,
+    vaccin: newVaccin,
+  })
+}

@@ -34,7 +34,8 @@ import CenterDescription from '../CenterDescription/CenterDescription';
   
   
 function Centers({centersData, delCenter}) {
-  
+  localStorage.setItem("reloadCount", 1)
+
   const columns = [
     {
       title: 'Centre',

@@ -39,3 +39,13 @@ export const addVaccin = async (vaccin) => {
       
       return result.data
     }
+
+    
+export const addCenterVaccin = async (vaccin) => {
+  console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",vaccin)
+  const result = await Axios.post(
+    "http://localhost:4000/VaccinCenter",
+    vaccin
+  )
+  return result.data
+}
