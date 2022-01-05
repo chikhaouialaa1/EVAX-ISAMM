@@ -68,11 +68,11 @@ router.post(
 
 //delete centre
 router.post(
-  "/Vaccination-centre-del",
+  "/Vaccination-centre-del/id",
 
   function (req, res) {
     try {
-      var centreId = req.body._id;
+      var centreId = req.params.id;
       console.log(centreId);
       Centre.deleteOne(
         { _id: centreId },
@@ -169,7 +169,7 @@ router.post(
       const vol = await volontaire.create({
         username, email:email.toLowerCase(), password: encryptedPassword, role, gouvernorat, ville, centre
       })
-        return res.status(200).send("volontaire created successfully");
+        return res.status(200).send(vol);
       
     } catch {
       return res.send("error").status(400);

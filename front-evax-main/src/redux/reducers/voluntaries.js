@@ -8,6 +8,9 @@ const initialState = {
 
 const voluntaries = (state = initialState, action) =>{
     switch(action.type){
+        case types.ADD_VOL:
+            return{...state,
+                list:[...state.list, action.vol]}
         case types.FETCH_VOL_REQUEST:
             return { ...state, loading: true, error: true }
         case types.FETCH_VOL_SUCCESS:

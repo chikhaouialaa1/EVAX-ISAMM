@@ -19,3 +19,11 @@ export const fetchVol = () => async (dispatch) => {
        }
  
  }
+ export const addVol = (vol) => async (dispatch) => {
+  const newVol = await api.addvoluntary(vol)
+
+  dispatch({
+    type: types.ADD_VOL,
+    vol: newVol,
+  })
+}

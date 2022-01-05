@@ -1,12 +1,14 @@
-import React, { useState, useEffect }from 'react'
+
 import './VolontaireList.css'
 import 'antd/dist/antd.css';
-import { useDispatch, useSelector } from "react-redux"
-import { Table, Button} from 'antd';
+
+import { Table} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
 import AdminHeader from '../AdminHeader/AdminHeader'
 import AddVolantaire from './AddVolontaire/AddVolantaire';
-import * as actions from '../../redux/actions/Voluntaries/index'
+
+
+
 
 const columns = [
     {
@@ -41,7 +43,7 @@ const columns = [
     },
   ];
 
-function VolontaireList({gouvernorat}) {
+function VolontaireList({gouvernorat,gouv,centers}) {
  
 
     return (
@@ -50,7 +52,7 @@ function VolontaireList({gouvernorat}) {
             <h5>Liste des volontaire</h5>
             <Table columns={columns} style={{width:'100%', borderRadius:'25px', marginTop:"20px"}}> </Table>
             <h5>Ajouter Volontaire</h5>
-            <AddVolantaire gouv2={gouvernorat}/>
+            <AddVolantaire gouv2={gouvernorat}  gouville={gouv} allcenters={centers}/>
             
         </div>
     )

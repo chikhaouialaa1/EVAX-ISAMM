@@ -31,6 +31,8 @@ import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
     },
   ];*/
   
+  
+function Centers({centersData, delCenter}) {
   const columns = [
     {
       title: 'Centre',
@@ -50,12 +52,19 @@ import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
     {
       title: 'Action',
       key: 'action',
-      render:()=>{
+      render:(text, record, index)=>{
         return(
           <>
-          <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }}/>
-          <EditOutlined style={{ fontSize: '16px', color: '#ABABFD' }}/>
-          <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}/>
+          <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} onClick = {
+          (e) => {
+            console.log("corresponding id is :", record._id)
+          }
+        }/>
+          <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}
+          onClick = {
+            (e) => {
+              delCenter(record._id)
+            }}/>
 
           </>
         )
@@ -63,8 +72,6 @@ import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
 
     },
   ];
-function Centers({centersData}) {
-
     return (
         <div className="table">
           <Link to="/addCenter">
