@@ -37,3 +37,8 @@ export const ADD_CENTER_VACCIN = "ADD_CENTER_VACCIN"
 export const DELETE_VACCIN = "DELETE_VACCIN"
 export const FETCH_VACCIN_BY_ID = "FETCH_VACCIN_BY_ID"
 export const UPDATE_VACCIN="UPDATE_VACCIN"
+
+//inscription
+export const INSCRIPTION = "INSCRIPTION"
+
+
