@@ -1,28 +1,22 @@
-//import { Mylist } from "../services/user-list"
-import AuthService from "../../services/auth-Service"
+import * as types from '../types/types'
+
+const initialState = {
+    loading: false,
+    errors: false,
+    list: [],
+    selectedVaccin:{},
+  }
 
 
-
-const AuthReducer=(initiallist=[],actions)=>{
-
-    switch(actions.type){
-            case "userlogin" :
-                //console.log(actions)
-                //console.log(actions.email,actions.password)
-                AuthService(actions.email,actions.password)
-            //let newlist=initiallist.splice(1,initiallist.length-1)
-            //return newlist
-
-            case "test" :
-                console.log("test case")  
-                
-                //let newlist=initiallist.splice(1,initiallist.length-1)
-                //return newlist
-
+const AuthReducer = (state = initialState, action) =>{
+    switch(action.type){
+        case types.INSCRIPTION:
+            return{...state,
+            list:[...state.list, action.User]}
         default:
-            return initiallist
+            return state
     }
-}
 
+}
 
 export default AuthReducer
