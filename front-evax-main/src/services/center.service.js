@@ -18,7 +18,7 @@ export const addCenter = async (center) => {
     )
     return result.data
   }
- export const deleteCenter = async (id) => {
+export const deleteCenter = async (id) => {
     console.log(id)
       const result = await Axios.post(
         "http://localhost:4000/Vaccination-centre-del/"+id
@@ -26,7 +26,26 @@ export const addCenter = async (center) => {
       
       return result.data
     }
-
+export const fetchCenterById = async (id) => {
+      const result = await Axios.get(
+        "http://localhost:4000/Vaccination-centre-id/"+id
+      )
+      return result.data
+    }
+    export const fetchCenterVaccinById = async (id) => {
+      const result = await Axios.get(
+        "http://localhost:4000/Vaacin-stock/"+id
+      )
+      console.log("wwwwwwwwwwwwwwww",result)
+      return result.data
+    }
+export const updateCenter = async (_id, center) => {
+      const result = await Axios.post(
+        "http://localhost:4000/Vaccination-centre-updated",{_id, center} 
+        
+      )
+      return result.data
+  }
 //gouvernorat
 export const getGouvernorat= async () => {
     //await delay(1000)
