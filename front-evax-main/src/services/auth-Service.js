@@ -1,12 +1,20 @@
 import React , {useEffect,useState} from 'react'
-import axios from 'axios'
+import Axios from 'axios'
 
-
+ 
+export const inscription = async (user) => {
+  console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",user)
+  const result = await Axios.post(
+    "https://evaxtest.herokuapp.com/VaccinCenter",
+    user
+  )
+  return result.data
+}
 let badpassword = false 
-
+/*
 function AuthService(email , password) {
 
-          axios.post('http://localhost:4000/user/login',{ email :email,password:password }).then(res=>{    
+          axios.post('https://evaxtest.herokuapp.com/user/login',{ email :email,password:password }).then(res=>{    
             console.log("++++",res.data)   
             localStorage.setItem('token', res.data); // write
             //this.props.history.push('/');
@@ -21,5 +29,5 @@ function AuthService(email , password) {
         )
     
 }
-export default AuthService
+export default AuthService*/
 export {badpassword}

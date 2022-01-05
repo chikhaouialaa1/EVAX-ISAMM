@@ -349,15 +349,21 @@ router.post("/VaccinCenter", function (req, res) {
     if (err) {
      console.log(err)
     }else{
-
+      Centre.find({ _id: req.body.id }, (err, data2) => {
+        if (err) {
+         console.log(err)
+        }else{
       VaccinesSchema.findOne({ centerID:req.body.id, vaccinID:req.body.vaccin}, (err, data) => {
         if (!data) {
           name=data1[0].vaccineName
+          Cname=data2[0].name
           console.log(name)
+          
           const vaccin = new VaccinesSchema({
             centerID:req.body.id,
             vaccinID:req.body.vaccin,
             vaccineName : name ,
+            centerName : Cname ,
             quantity:  req.body.quantity  
         });
         console.log(vaccin)
@@ -383,8 +389,9 @@ router.post("/VaccinCenter", function (req, res) {
         }
       });
      
-     
+    }});
     }
+    
     });
  
   
