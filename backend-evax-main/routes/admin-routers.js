@@ -1,9 +1,10 @@
 const express = require("express");
 const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
-const ConfirmationUsers = require("../model/confirmedUsersSchema");
+const confirnatedUser = require("../model/confirmedUsersSchema");
 const VaccinesSchema = require("../model/VaccinesSchema");
 const Vaccine = require("../model/Vaccine");
+const VaccinStock = require("../model/VaccinesSchema");
 
 const Message = require("../model/ContactSchema");
 const Centre = require("../model/vaccinationCentreSchema");
@@ -19,6 +20,7 @@ require("dotenv").config();
 var nodemailer = require("nodemailer");
 const middlewares = require("../middleware/user-midlewares");
 const vaccinationCentreSchema = require("../model/vaccinationCentreSchema");
+const { db } = require("../model/userSchema");
 const SECRET_KEY = process.env.SECRET_KEY;
 router.use(express.json());
 
@@ -169,8 +171,14 @@ router.get("/Messages", function (req, res) {
   Message.find({}, (err, data) => {
     console.log(data);
     return res.send(data).status(200);
-  });
+  })
+ 
 });
+
+
+ 
+
+
 //gestion volontaire
 //new volontaire
 router.post(
@@ -440,5 +448,31 @@ router.post(
     }
   }
 );
+
+//Stat
+
+//Registres USers stat
+
+router.get("/nbRegistred",async (req, res) => {
+
+  let result =
+  await confirnatedUser.countDocuments({ });
+ console.log(result)
+  res.json(result);
+ });
+ 
+ router.get("/nbvaccinated",async (req, res) => {
+
+  let result =
+  await confirnatedUser.countDocuments({"validated":true});
+ console.log(result)
+  res.json(result);
+ });
+
+ router.get("/vaccinStat", function (req, res) {
+  VaccinStock.find({}, (err, data) => {
+    return res.send(data).status(200);
+  });
+});
 
 module.exports = router;

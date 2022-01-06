@@ -18,7 +18,6 @@ const messages = (state = initialState, action) => {
       return { ...state,list:[...action.messages], loading: false };
     case types.FETCH_MSG_FAILURE:
       return { ...state, error: true, loading: false };
-
     default:
       return state;
   }
