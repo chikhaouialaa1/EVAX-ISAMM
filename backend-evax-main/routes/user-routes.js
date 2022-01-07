@@ -260,6 +260,7 @@ router.post(
 
 router.post('/rdv',(req,resp)=>{
   dcodedToken = jwt.verify(req.body.token,process.env.SECRET_KEY);
+  console.log(req.body)
   user_id=dcodedToken.user_id
   function addMinutes(date, minutes) {
       return new Date(new Date(date).getTime() + minutes*60000);
@@ -271,7 +272,7 @@ router.post('/rdv',(req,resp)=>{
     }
     var d = new Date();
 console.log(d);
-  Centre.findOne({_id:req.body.id_center  }, function(err, docs) {
+  centre.findOne({_id:req.body.center_id  }, function(err, docs) {
       var date_diff_indays = function(date1, date2) {
           dt1 = new Date(date1);
           dt2 = new Date(date2);
@@ -301,7 +302,7 @@ console.log(d);
           console.log("saved");
         }
     });
-      Centre.findOneAndUpdate({_id:req.body.id_center },
+      centre.findOneAndUpdate({_id:req.body.center_id },
           docs,
           { new: true },
           (err, contact) => {

@@ -17,7 +17,7 @@ function Citoyen() {
       dispatch(centerActions.fetchCenters())
     }, [])
     let [center_id, setCenter_id] = useState("")
-
+const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MTM4ZDIxNmNiZTgzMDRlIiwiZW1haWwiOiJheW1AZ21haWwuY28iLCJhY3RpdmF0aW9uIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE2NDE1OTU0MzMsImV4cCI6MTY0MTYwMjYzM30.Dr11MeMIscr8kwijDc3mHgfWDSzGpP-B06Wy8xmuB4c"
     const centers = useSelector((state) => state.centers)
     const options = centers.list.map((item, index)=>{
       console.log(item);
@@ -27,10 +27,10 @@ function Citoyen() {
     })
 
     const handleAddCenter = () => {
-      addCenter(center_id)
+      addCenter(center_id,token)
     }
-    const addCenter =  (center_id) => {
-      dispatch(userAction.rdv({center_id}))
+    const addCenter =  (center_id,token) => {
+      dispatch(userAction.rdv({center_id,token}))
     }
   return (
     <div className="citoyen">
@@ -52,7 +52,7 @@ function Citoyen() {
            
             <div style={{ margin: "auto" }}>
               <h6>RendezVous </h6>
-              <Button className="suivant" >
+              <Button className="suivant"  onClick={handleAddCenter} >
               RendezVous
                     </Button>
                   <Button
@@ -63,7 +63,7 @@ function Citoyen() {
                   borderColor: "#FFBC6E",
                   paddingLeft: 5,
                   marginLeft: 130,
-                }} onClick={handleAddCenter}
+                }}
               >
                 Envoyer
               </Button>
