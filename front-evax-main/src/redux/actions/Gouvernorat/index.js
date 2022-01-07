@@ -26,7 +26,7 @@ export const fetchGov = () => async (dispatch) => {
   })
   
   function filterByID(item) {
-    if (item.gouvernorat._id ==idGov) {
+    if (item.gouvernorat._id ===idGov) {
       return true
     }
     return false;

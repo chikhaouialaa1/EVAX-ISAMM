@@ -40,7 +40,12 @@ function App() {
         <Route path="/vaccin" element={<AdminSideBar/>}/>
         <Route path="/jpo" element={<Jpo/>}/>
         <Route path="/addCenter" element={<AddCenter/>}/>
+
+        <Route path="/centerDetail" element={<CenterDetail/>}/>
+        <Route path="/accueil" element={<Home/>}/>
+
         <Route path="/addPharmacie/:type" element={<AddPharmacie/>}/>
+
         <Route path="/addCenter/:id" element={<AddCenterVaccin/>}/>
 
         <Route path="/addVaccin" element={<AddVaccin/>}/>
@@ -55,6 +60,8 @@ function App() {
         <Route path="/jpoDetail" element={<JpoDetail/>}/>
         <Route path="/volontaire" element={<Volontaire/>}/>
         <Route path="/volontaireDetail" element={<VolontaireDetail/>}/>
+        <Route path="/Dashboard" element={<Dashboard/>}/>
+        
       </Routes>
     </Router>
       

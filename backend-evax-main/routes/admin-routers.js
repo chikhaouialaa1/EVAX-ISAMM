@@ -1,9 +1,11 @@
 const express = require("express");
 const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
-const ConfirmationUsers = require("../model/confirmedUsersSchema");
+const confirnatedUser = require("../model/confirmedUsersSchema");
+const registerdUser = require("../model/userSchema");
 const VaccinesSchema = require("../model/VaccinesSchema");
 const Vaccine = require("../model/Vaccine");
+const VaccinStock = require("../model/VaccinesSchema");
 
 const Message = require("../model/ContactSchema");
 const Centre = require("../model/vaccinationCentreSchema");
@@ -20,6 +22,7 @@ require("dotenv").config();
 var nodemailer = require("nodemailer");
 const middlewares = require("../middleware/user-midlewares");
 const vaccinationCentreSchema = require("../model/vaccinationCentreSchema");
+const { db } = require("../model/userSchema");
 const SECRET_KEY = process.env.SECRET_KEY;
 router.use(express.json());
 
@@ -192,8 +195,14 @@ router.get("/Messages", function (req, res) {
   Message.find({}, (err, data) => {
     console.log(data);
     return res.send(data).status(200);
-  });
+  })
+ 
 });
+
+
+ 
+
+
 //gestion volontaire
 //new volontaire
 router.post(
@@ -207,7 +216,7 @@ router.post(
       const vol = await volontaire.create({
         username, email:email.toLowerCase(), password: encryptedPassword, role, gouvernorat, ville, centre
       })
-        return res.status(200).send("volontaire created successfully");
+        return res.status(200).send(vol);
       
     } catch {
       return res.send("error").status(400);
@@ -463,6 +472,34 @@ router.post(
     }
   }
 );
+
+
+//Stat
+
+//Registres USers stat
+
+router.get("/nbRegistred",async (req, res) => {
+
+  let result =
+  await registerdUser.countDocuments({ });
+ console.log(result)
+  res.json(result);
+ });
+ 
+ router.get("/nbvaccinated",async (req, res) => {
+
+  let result =
+  await confirnatedUser.countDocuments({"validated":true});
+ console.log(result)
+  res.json(result);
+ });
+
+ router.get("/vaccinStat", function (req, res) {
+  VaccinStock.find({}, (err, data) => {
+    return res.send(data).status(200);
+  });
+});
+
 
 
 
