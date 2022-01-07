@@ -12,7 +12,10 @@ import Home from './pages/Visitor/Home/Home'
 import Contact from './pages/Visitor/Contact/Contact'
 import Inscription from './pages/Authentication/Inscription/Inscription';
 import Login from './pages/Authentication/Login/Login';
+import ChatbotComponent from './chatbot/chatbot';
+
 import { Provider } from 'react-redux';
+
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
         <Route path="/contactUs" element={<Contact/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/evax/chatbot" element={<ChatbotComponent/>}/>
+        
       </Routes>
     </Router>
       
