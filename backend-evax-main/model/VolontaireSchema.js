@@ -17,6 +17,18 @@ VolontaireSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  center_name: {
+    type: String,
+    required: false,
+  },
+  ville_name: {
+    type: String,
+    required: false,
+  },
+  gouv_name: {
+    type: String,
+    required: false,
+  },
 
   gouvernorat: {
     type: mongoose.Schema.Types.ObjectId,

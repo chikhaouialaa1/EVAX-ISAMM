@@ -1,5 +1,5 @@
 import React, { useState }from "react";
-import "./AddVolontaire.css";
+import "./AddVolontaireForm.css";
 import { Input, Button, Select } from "antd";
 import "antd/dist/antd.css";
 import { useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ import * as centerActions from '../../../redux/actions/Centres/index'
 
 const { Option } = Select;
 
-function AddVolantaire({ gouv2, gouville,allcenters }) {
+function AddVolantaireForm({gouv1, gouv,centers }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,24 +23,25 @@ function AddVolantaire({ gouv2, gouville,allcenters }) {
 
 
 
- 
-  const options = gouv2.map((item, index) => {
+
+  const options = gouv1.listGovs.map((item, index) => {
     
     return <Option value={item._id}>{item.name}</Option>;
   });
-  const optionsCenters = allcenters.map((item, index) => {
+  const optionsCenters = centers.list.map((item, index) => {
     
     return <Option value={item._id}>{item.name}</Option>;
   });
 
 
   
-  const optionvilles = gouville.map((item, index) => {
+  const optionvilles = gouv.listVille.map((item, index) => {
  
     return <Option value={item._id}>{item.name}</Option>;
   });
   return (
     <div className="add-volontaire">
+     
       <h6>Nom et prenom</h6>
       <Input placeholder="Donner nom et prénom" className="input"
       value={username}
@@ -100,7 +101,8 @@ function AddVolantaire({ gouv2, gouville,allcenters }) {
       
       <Button className="button" onClick={() => dispatch(volActions.addVol({username, email,password,role,gouvernorat,ville,centre}))}>Ajouter</Button>
     </div>
+    
   );
 }
 
-export default AddVolantaire;
+export default AddVolantaireForm;
