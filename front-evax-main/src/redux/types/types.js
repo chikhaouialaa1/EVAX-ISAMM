@@ -72,4 +72,8 @@ export const FETCH_VACSTAT_FAILURE = "FETCH_VACSTAT_FAILURE"
 
 
 
+//rdv
+export const RDV = "RDV"
+
+
 
