@@ -69,14 +69,15 @@ function App() {
 
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/jpoDetail" element={<JpoDetail/>}/>
+        <Route path="/jpoDetail/:id" element={<JpoDetail/>}/>
         <Route path="/volontaire" element={<Volontaire/>}/>
        <Route path="/volontaireDetail/:id" element={<VolontaireDetail />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Da" element={<CenterDescription />} />
-             <Route path="/addVolontaire" element={<AddVolontaire />} />
-    <Route path="/volontaireDetail" element={<VolontaireDetail />} />
-            <Route path="/addPharmacie/:type" element={<AddPharmacie />} />
+        <Route path="/addVolontaire" element={<AddVolontaire />} />
+        <Route path="/volontaireDetail" element={<VolontaireDetail />} />
+        <Route path="/addPharmacie/:type" element={<AddPharmacie />} />
+
 
       </Routes>
     </Router>

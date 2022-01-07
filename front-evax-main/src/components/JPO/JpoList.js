@@ -1,16 +1,19 @@
 import React from 'react'
 import AdminHeader from '../AdminHeader/AdminHeader'
+import {Link} from 'react-router-dom'
 import './JpoList.css'
 import 'antd/dist/antd.css';
 import { Table, Button, Anchor} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
 import AddJPO from './AddJPO/AddJPO';
 const { LinkA } = Anchor;
-const columns = [
+
+function JpoList({jpos , deleteJpo}) {
+  const columns = [
     {
       title: 'JPO',
-      dataIndex: 'title',
-      key: 'title',
+      dataIndex: 'titre',
+      key: 'titre',
     },
     {
       title: 'Date',
@@ -18,24 +21,22 @@ const columns = [
       key: 'date',
     },
     {
-      title: 'Stock en vaccin',
-      dataIndex: 'stockV',
-      key: 'stockV',
-    },
-    {
-        title: 'Nombre de volontaire',
-        dataIndex: 'nbrVolontaire',
-        key: 'nbrVolontaire',
-      },
-    {
       title: 'Action',
       key: 'action',
-      render:()=>{
+      render:(text, record, index)=>{
+        const id = record._id
         return(
           <>
-          <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }}/>
-          <EditOutlined style={{ fontSize: '16px', color: '#ABABFD' }}/>
-          <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}/>
+          <Link to={"/jpoDetail/"+id}>
+            <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }}/>
+          </Link>
+          
+          <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}
+          onClick = {
+            (e) => {
+              deleteJpo(record._id)
+              console.log("corresponding id is :", record._id)
+            }}/>
 
           </>
         )
@@ -43,12 +44,11 @@ const columns = [
 
     },
   ];
-function JpoList() {
     return (
         <div className='Jpos'>
             <AdminHeader/>
             <h5>Liste Jpo</h5>
-            <Table columns={columns} style={{width:"100%", marginTop:"20px"}}> </Table>
+            <Table columns={columns} dataSource={jpos} style={{width:"100%", marginTop:"20px"}}> </Table>
             <h5>Créer JPO</h5>
             <AddJPO/>
             

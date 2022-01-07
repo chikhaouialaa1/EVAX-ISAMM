@@ -65,9 +65,7 @@ router.put("/Vaccination-centre-updated/:id", async (req, res) => {
     if (!updated_center) {
       return res.status(404).json({ message: "center no found" });
     }
-    res.status(203).json({
-      message: "center updated with success",
-    });
+    res.send("success")
   } catch (err) {
     console.log(err);
     res.status(500).send(err);
