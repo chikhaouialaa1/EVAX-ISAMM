@@ -99,7 +99,8 @@ function AddVolantaireForm({gouv1, gouv,centers }) {
         {optionsCenters}
       </Select>
       
-      <Button className="button" onClick={() => dispatch(volActions.addVol({username, email,password,role,gouvernorat,ville,centre}))}>Ajouter</Button>
+      <Button className="button" onClick={() => dispatch(volActions.addVol({username, email,password,role,gouvernorat,ville,centre}))
+    }>Ajouter</Button>
     </div>
     
   );

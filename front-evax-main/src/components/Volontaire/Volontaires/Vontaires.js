@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import { Table, Button} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
 
-function Volontaires({volData}) {
+function Volontaires({volData,deleteVol}) {
   
   localStorage.setItem("reloadCount", 1)
   const type = false
@@ -16,32 +16,45 @@ function Volontaires({volData}) {
       key: 'username',
     },
     {
-      title: 'Gouvenorat',
+      title: 'Email',
       dataIndex: 'email',
       key: 'email',
     },
     {
-      title: 'Ville',
-      dataIndex: 'ville',
+      title: 'Gouvernorat',
+      dataIndex: 'gouv_name',
       key: 'ville',
     },
     {
+      title: 'Ville',
+      dataIndex: 'ville_name',
+      key: 'ville',
+    },
+
+    {
       title: 'Centre',
-      dataIndex: 'centre',
+      dataIndex: 'center_name',
       key: 'centre',
     },
     {
       title: 'Action',
       key: 'action',
-      render:()=>{
-       
+      render:(text, record, index)=>{
+        const id = record._id
         return(
+         
           <>
           
-         
-            <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} />
-          
+          <Link to={"/volontaireDetail/"+id}>
+        
+          <EyeOutlined style={{ fontSize: '16px', color: '#ABABFD' }} />
+          </Link>
           <DeleteOutlined style={{ fontSize: '16px', color: '#FD9F9F' }}
+          onClick = {
+            (e) => {
+              deleteVol(record._id)
+              console.log("corresponding id is :", record._id)
+            }}
           />
 
           </>
@@ -54,7 +67,7 @@ function Volontaires({volData}) {
       <>
         <div className="table">
           <Link to={"/addVolontaire"}>
-            <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter un volontaire</Button>
+            <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}} >Ajouter un volontaire</Button>
           </Link>
           
           <Table dataSource={volData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>

@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 function callback(key) {
   console.log(key);
 }
-function VolontairesLists({vol}) {
+function VolontairesLists({vol,deleteVol}) {
     
     return (
         <div className="volontaireslists">
@@ -25,7 +25,7 @@ function VolontairesLists({vol}) {
             <div className="volontairess">
             <Tabs defaultActiveKey="1" onChange={callback} className="tabs-center" centered="true" size="large" tabBarStyle={{backgroundColor:'transparent', color:"#2E4765"}}>
                 <TabPane tab="Les volontaires " key="1" className="centre"> 
-                        <Volontaires volData = {vol.list} />
+                        <Volontaires volData = {vol.list} deleteVol={deleteVol}/>
                         
                 </TabPane>
                 
