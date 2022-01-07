@@ -11,6 +11,7 @@ const gouvernorat = require("../model/gouvernoratSchema");
 const ville = require("../model/ville")
 const Operator = require("../model/OperatorSchema");
 const volontaire = require("../model/VolontaireSchema")
+const pharmacie = require("../model/pharmacieSchema")
 
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -32,7 +33,8 @@ router.post(
         name : req.body.name,  
         ville : req.body.ville,        
         manager : req.body.manager,        
-        capacity : req.body.capacity,        
+        capacity : req.body.capacity,
+        isPharmacie: req.body.isPharmacie      
       
     });
     
@@ -53,13 +55,34 @@ router.post(
   }
 );
 
+
+router.put('/Vaccination-centre-updated/:id', async (req, res) => {
+  const filter = {
+    _id: req.params.id,
+  };
+  const updateObject = req.body;
+
+  try {
+    const updated_center = await Centre.findOneAndUpdate(filter, updateObject);
+    if (!updated_center) {
+      return res.status(404).json({ message: 'center no found' });
+    }
+    res.status(203).json({
+      message: 'center updated with success',
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 //update centre
+/*
 router.post(
-  "/Vaccination-centre-updated",
+  "/Vaccination-centre-updated/:id",
 
   function (req, res) {
     try {
-      var centreId = req.body._id;
+      var centreId = req.params.id;
       const { name,  manager, capacity } = req.body;
       console.log(centreId);
       Centre.updateOne(
@@ -79,7 +102,7 @@ router.post(
       return res.send("error").status(400);
     }
   }
-);
+);*/
 
 //delete centre
 router.post(
@@ -414,5 +437,8 @@ router.post(
     }
   }
 );
+
+
+
 
 module.exports = router;

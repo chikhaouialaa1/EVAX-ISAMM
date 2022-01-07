@@ -4,38 +4,9 @@ import 'antd/dist/antd.css';
 import {Link} from 'react-router-dom'
 import { Table, Button} from 'antd';
 import {EyeOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
-import CenterDescription from '../CenterDescription/CenterDescription';
-/*const dataSource = [
-    {
-      key: '1',
-      center: 'Maison jeune',
-      capacity: 10,
-      location:'Tunis'
-    },
-    {
-      key: '2',
-      center: 'Maison jeune',
-      capacity: 10,
-      location:'Tunis'
-    },
-    {
-      key: '3',
-      center: 'Maison jeune',
-      capacity: 10,
-      location:'Tunis'
-    },
-    {
-      key: '4',
-      center: 'Maison jeune',
-      capacity: 10,
-      location:'Tunis'
-    },
-  ];*/
-  
-  
-function Centers({centersData, delCenter}) {
-  localStorage.setItem("reloadCount", 1)
-  const type = false
+function Pharmacies({pharmacieData, delCenter}) {
+    localStorage.setItem("reloadCount", 1)
+    const type = true
   const columns = [
     {
       title: 'Centre',
@@ -46,11 +17,6 @@ function Centers({centersData, delCenter}) {
       title: 'Localisation',
       dataIndex: 'ville',
       key: 'ville',
-    },
-    {
-      title: 'Nombre max 1/2',
-      dataIndex: 'capacity',
-      key: 'capacity',
     },
     {
       title: 'Responsable',
@@ -84,11 +50,11 @@ function Centers({centersData, delCenter}) {
     return (
       <>
         <div className="table">
-          <Link to={"/addCenter"}>
-            <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter centre</Button>
+          <Link to={"/addPharmacie/"+type}>
+            <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter pharmacie</Button>
           </Link>
           
-          <Table dataSource={centersData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>
+          <Table dataSource={pharmacieData} columns={columns} style={{width:'100%', borderRadius:'25px'}}> </Table>
         </div>
         
         
@@ -96,4 +62,4 @@ function Centers({centersData, delCenter}) {
     )
 }
 
-export default Centers
+export default Pharmacies

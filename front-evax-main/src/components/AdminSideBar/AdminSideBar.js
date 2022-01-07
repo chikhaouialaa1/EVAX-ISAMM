@@ -10,7 +10,7 @@ function AdminSideBar() {
   useEffect(()=>{
     ReactGa.initialize('UA-216118120-1')
     ReactGa.pageview(window.location.pathname + window.location.search)
-    console.log("teeeeeeeeeest")
+    
   }, []);
   
   

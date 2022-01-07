@@ -25,6 +25,7 @@ import JpoDetail from './pages/AdminPage/JPO/JpoDetail/JpoDetail';
 import Volontaire from './pages/AdminPage/Volontaire/Volontaire';
 import VolontaireDetail from './pages/AdminPage/Volontaire/VolantaireDetail/VolontaireDetail';
  import ReactGa from 'react-ga'
+import AddPharmacie from './pages/AdminPage/VaccinationCenter/AddCenter/AddPharmacie';
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/vaccin" element={<AdminSideBar/>}/>
         <Route path="/jpo" element={<Jpo/>}/>
         <Route path="/addCenter" element={<AddCenter/>}/>
+        <Route path="/addPharmacie/:type" element={<AddPharmacie/>}/>
         <Route path="/addCenter/:id" element={<AddCenterVaccin/>}/>
 
         <Route path="/addVaccin" element={<AddVaccin/>}/>

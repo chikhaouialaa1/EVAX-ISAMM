@@ -45,6 +45,11 @@ console.log(vaccins[0])
   const [manager, setManager] = useState("");
   const [capacity, setCapacity] = useState("");
   
+  const handleUpdateCenter = () => {
+    updateCenter(centerDescription._id, {name, manager, capacity})
+    
+  }
+  
     return (
         <div>
             <Button type="dashed" ghost danger style={{position:'absolute', top:'60px', right:'10px', paddingRight:'20px'}} onClick={() => setVisible(true)}><EditOutlined style={{ fontSize: '16px'}} danger/>Editer</Button>
@@ -60,7 +65,7 @@ console.log(vaccins[0])
               extra={
                 <Space>
                   <Button onClick={() => setVisible(false)} className="cancel">Cancel</Button>
-                  <Button onClick={() => setVisible(false)} type="primary" className="submit">
+                  <Button onClick={handleUpdateCenter} type="primary" className="submit">
                     Submit
                   </Button>
                 </Space>
@@ -68,15 +73,18 @@ console.log(vaccins[0])
             >
                
               <h6>Nom Centre</h6>
-              <Input placeholder="Entrer centre" className="input"
+              <Input placeholder="Entrer nom centre" className="input"
+              defaultValue={centerDescription.name}
               value={name}
               onChange={(e) => setName(e.target.value)}/>
               <h6>Responsable</h6>
-              <Input placeholder="Entrer centre" className="input"
+              <Input placeholder="Entrer responsable" className="input"
+              defaultValue={centerDescription.manager}
               value={manager}
               onChange={(e) => setManager(e.target.value)}/>
               <h6>Capacité</h6>
-              <Input placeholder="Entrer centre" className="input"
+              <Input placeholder="Entrer capacité" className="input"
+              defaultValue={centerDescription.capacity}
               value={capacity}
               onChange={(e) => setCapacity(e.target.value)}/>
               
@@ -84,7 +92,7 @@ console.log(vaccins[0])
             <h5 style={{color:"#ABABFD", marginTop:"25px", fontSize:'20px'}}>Détails</h5>
             <Descriptions layout="vertical" labelStyle={{color:"#2E4765", fontWeight:'bold'}} >
                 <Descriptions.Item label="Nom centre" >{centerDescription.name}</Descriptions.Item>
-                <Descriptions.Item label="Ville"></Descriptions.Item>
+                <Descriptions.Item label="Ville">{centerDescription.ville.name}</Descriptions.Item>
                 <Descriptions.Item label="Responsable">{centerDescription.manager}</Descriptions.Item>
                 <Descriptions.Item label="Nombre max 1/2">{centerDescription.capacity}</Descriptions.Item>
             </Descriptions>
