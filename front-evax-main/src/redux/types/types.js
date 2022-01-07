@@ -32,3 +32,7 @@ export const UPDATE_VACCIN="UPDATE_VACCIN"
 export const INSCRIPTION = "INSCRIPTION"
 
 
+//rdv
+export const RDV = "RDV"
+
+

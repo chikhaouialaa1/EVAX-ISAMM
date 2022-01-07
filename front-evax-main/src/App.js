@@ -18,6 +18,7 @@ import Contact from './pages/Visitor/Contact/Contact'
 import Inscription from './pages/Authentication/Inscription/Inscription';
 import Login from './pages/Authentication/Login/Login';
 import Citoyen from './components/Citoyen/Citoyen'
+import Rdv from './components/Rendez-Vous/Citoyen'
 
 import { Provider } from 'react-redux';
 import JpoDetail from './pages/AdminPage/JPO/JpoDetail/JpoDetail';
@@ -46,6 +47,8 @@ function App() {
         <Route path="/home" element={<Home/>}/>
         <Route path="/contactUs" element={<Contact/>}/>
         <Route path="/citoyen" element={<Citoyen/>}/>
+        <Route path="/rendez-vous" element={<Rdv/>}/>
+
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/jpoDetail" element={<JpoDetail/>}/>
