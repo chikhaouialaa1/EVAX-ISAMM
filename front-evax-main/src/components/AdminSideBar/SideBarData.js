@@ -11,7 +11,7 @@ import {
 export const SideBarData = [
   {
     title: "Dashboard",
-    path: "/",
+    path: "/Dashboard",
     icon: <HomeOutlined />,
     cName: "nav-text",
   },

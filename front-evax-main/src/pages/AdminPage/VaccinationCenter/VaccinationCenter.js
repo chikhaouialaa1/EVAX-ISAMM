@@ -17,6 +17,7 @@ function VaccinationCenter() {
       }
     
     useEffect(() => {
+        
         dispatch(actions.fetchCenters())
       }, [])
     const deleteCenter =  (id) => {
@@ -26,7 +27,7 @@ function VaccinationCenter() {
             <AdminSideBar/>
             {centers.loading  && <div>Loading ... </div>}
             {!centers.loading && isVisible &&(
-                <VaccinationCenters centers ={centers.list} deleteCenter={deleteCenter}/>
+            <VaccinationCenters centers ={centers.listCenter} pharmacie ={centers.listPharmacie} deleteCenter={deleteCenter}/>
             )}
             
         </div>

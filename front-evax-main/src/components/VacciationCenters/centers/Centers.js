@@ -35,7 +35,7 @@ import CenterDescription from '../CenterDescription/CenterDescription';
   
 function Centers({centersData, delCenter}) {
   localStorage.setItem("reloadCount", 1)
-
+  const type = false
   const columns = [
     {
       title: 'Centre',
@@ -51,6 +51,11 @@ function Centers({centersData, delCenter}) {
       title: 'Nombre max 1/2',
       dataIndex: 'capacity',
       key: 'capacity',
+    },
+    {
+      title: 'Responsable',
+      dataIndex: 'manager',
+      key: 'manager',
     },
     {
       title: 'Action',
@@ -79,7 +84,7 @@ function Centers({centersData, delCenter}) {
     return (
       <>
         <div className="table">
-          <Link to="/addCenter">
+          <Link to={"/addCenter"}>
             <Button type="dashed" ghost danger style={{marginTop:'5px', marginBottom:'5px'}}>Ajouter centre</Button>
           </Link>
           

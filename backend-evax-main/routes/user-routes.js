@@ -105,8 +105,10 @@ router.post("/user/login", async (req, res) => {
                   "confirmation code already sent , please activate your account !",
               })
               .status(200);
+
           } else {
             confirmationcoode = randomInteger(0, 9999).toString();
+            console.log(confirmationcoode)
             userConfirmation.set({ confirmationId: confirmationcoode });
             userConfirmation.save();
             emailSenderFunction(confirmationcoode, user.email);
@@ -132,7 +134,7 @@ router.post("/user/login", async (req, res) => {
 });
 
 router.post(
-  "user/account/validation",
+  "/user/account/validation",
   middlewares.verifyjwt,
   async (req, res) => {
     const token = req.headers["authorization"];
@@ -188,6 +190,35 @@ router.post(
     }
   }
 );
+
+router.post('/vaccination',middlewares.verifyjwt,middlewares.isUser, function(req, res){
+  try{
+      const token = req.headers['authorization']
+      dcodedToken = jwt.verify(token,process.env.SECRET_KEY);
+      userid=dcodedToken.user_id
+
+      var user =  User.findById({_id:userid });
+      var {governementId,vaccinationCenterId}=req.body
+      
+      const confirmationUsers = ConfirmationUsers.create({
+        userid,
+        governementId,
+        vaccinationCenterId,
+        Date:"Selected Date by admin"
+      
+      })
+
+      return  res.send("confirmationUsers done").status(200)
+
+  }
+  catch{return res.send("invalid token").status(401)}
+
+  });
+
+
+
+
+  
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -245,7 +276,6 @@ router.post(
   async(req,res)=>{
     try {
 
-    
     msg=new ContactSchema(
      req.body
     )
