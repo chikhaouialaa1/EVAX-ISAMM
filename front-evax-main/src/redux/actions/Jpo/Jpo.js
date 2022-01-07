@@ -43,3 +43,43 @@ export const fetchJpoById = (id) => async (dispatch) => {
       jpo,
     })
   }
+export const localStock = (id) => async (dispatch) => {
+    
+    dispatch ( {
+      type: types.LOCAL_STOCK,
+      id,
+    })
+  }
+export const affectCenterJpo = (centerJpo) => async (dispatch) => {
+    const jpoCenter = await api.affectVaccinJpo(centerJpo)
+    dispatch ( {
+      type: types.AFFECT_CENTER_JPO,
+      jpoCenter,
+    })
+  }
+export const fetchJpoAllCenters = (jpoId) => async (dispatch) => {
+  dispatch({
+    type: types.FETCH_ALL_JPO_CENTERS_REQUEST,
+    
+  })
+     try {
+      const jpoCenters = await api.getAllJpoCenters(jpoId)
+      console.log("tessssssssssssssssst"+jpoCenters)
+        dispatch({
+          type: types.FETCH_ALL_JPO_CENTERS_SUCCESS,
+          jpoCenters,
+        })
+     } catch (e) {
+      dispatch({
+        type: types.FETCH_ALL_JPO_CENTERS_FAILURE,
+      })
+     }
+  }
+
+export const deleteCenterFromJpo = (jpoCenter) => async (dispatch) => {
+    await api.deleteCenterFromJpo(jpoCenter)
+    dispatch ( {
+      type: types.DELETE_JPO_CENTERS,
+      jpoCenter,
+    })
+  }

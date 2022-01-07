@@ -20,7 +20,7 @@ function JpoDetail() {
         <div>
             <AdminSideBar/>
             <div className="content">
-                <AdminHeader/>
+                <AdminHeader title="Description JPO"/>
                 {jpoDescription&&(
                     <JpoDescription jpoDescription={jpoDescription}/>
                 )

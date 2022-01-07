@@ -23,6 +23,7 @@ function AddJPO() {
     addJpo(titre, date)
     setTitre("")
     setDate("") 
+    window.location.reload(false);
   }
     return (
         <>

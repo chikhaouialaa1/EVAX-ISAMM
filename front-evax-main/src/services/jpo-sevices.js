@@ -38,7 +38,7 @@ export const affectVaccinJpo = async (jpoCenter) => {
         
         return result.data
       }
-export const deleteVaccinFromJpo = async (jpoCenter) => {
+export const deleteCenterFromJpo = async (jpoCenter) => {
     
         const result = await Axios.get(
               "http://localhost:4000/jpo-del-center",jpoCenter
@@ -46,10 +46,10 @@ export const deleteVaccinFromJpo = async (jpoCenter) => {
             
             return result.data
           }
-export const getAllJpoCenters = async (jpoId) => {
+export const getAllJpoCenters = async (id) => {
     
             const result = await Axios.get(
-                  "http://localhost:4000/jpo-centers",jpoId
+                  "http://localhost:4000/jpo-centers/"+id
                 )
                 
                 return result.data

@@ -5,6 +5,8 @@ const initialState = {
     errors: false,
     listJpo: [],
     selectedJpo:{},
+    listTemp:[],
+    listcenterJpo:[],
   }
 
   const Jpos = (state = initialState, action) =>{
@@ -24,6 +26,20 @@ const initialState = {
         case types.FETCH_JPO_BY_ID:
             return{...state,
                 selectedJpo: action.jpo}
+        case types.LOCAL_STOCK:
+            return{...state,
+                listTemp:[...state.listTemp, action.id] }
+        case types.AFFECT_CENTER_JPO:
+            return{...state,
+                listcenterJpo:[...state.listcenterJpo, action.jpoCenter]}
+        case types.FETCH_ALL_JPO_CENTERS_REQUEST:
+                return { ...state, loading: true, error: true }
+        case types.FETCH_ALL_JPO_CENTERS_SUCCESS:
+                return { ...state, listcenterJpo: [...action.jpoCenters], loading: false }
+        case types.FETCH_ALL_JPO_CENTERS_FAILURE:
+                return { ...state, error: true, loading: false }
+        case types.DELETE_JPO_CENTERS:
+            return { ...state}
         default:
             return state
     }

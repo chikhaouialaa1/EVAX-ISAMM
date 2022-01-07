@@ -164,12 +164,12 @@ router.get("/jpo-one-center", function (req, res) {
   });
 });
 // get jpo all centers
-router.get("/jpo-centers", function (req, res) {
-  var idJpo = req.body.jpoId;
-JpoCenter.find({jpoId:idJpo}).populate("jpoId centreId volontaire")
-.then((jpo) => {
-  res.json(jpo);
-});
-  
+router.get("/jpo-centers/:id", function (req, res) {
+  var idJpo = req.params.id;
+  JpoCenter.find({jpoId:idJpo}).populate("jpoId centreId volontaire")
+  .then((jpo) => {
+    res.json(jpo);
+  });
+    
 });
 module.exports = router;
