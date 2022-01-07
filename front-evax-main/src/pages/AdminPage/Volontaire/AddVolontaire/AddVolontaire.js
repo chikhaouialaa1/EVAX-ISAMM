@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import AdminSideBar from "../../../components/AdminSideBar/AdminSideBar";
+import AdminSideBar from "../../../../components/AdminSideBar/AdminSideBar";
 import { useDispatch, useSelector } from "react-redux";
-import VolontaireList from "../../../components/Volontaire/VolontaireList";
-import "./Volontaire.css";
-import * as volActions from "../../../redux/actions/Voluntaries/index";
-import * as govActions from "../../../redux/actions/Gouvernorat/index";
-import * as centerActions from '../../../redux/actions/Centres/index'
 
-function Volontaire() {
+import "./AddVolontaire.css";
+import * as volActions from "../../../../redux/actions/Voluntaries/index";
+import * as govActions from "../../../../redux/actions/Gouvernorat/index";
+import * as centerActions from "../../../../redux/actions/Centres/index";
+import AddVolantaireForm from "../../../../components/Volontaire/AddVolontaireForm/AddVolantaireForm";
+
+function AddVolontaire() {
     const volountaries = useSelector((state) => state.volountaries)
     
     useEffect(() => {
@@ -34,7 +35,7 @@ function Volontaire() {
     
     <div className="volantaire-content">
       <AdminSideBar />
-      <VolontaireList gouvernorat={gouvernorat.listGovs} gouv={gouvernorat.listVille} centers={centers.list} />
+      <AddVolantaireForm gouv1={gouvernorat} gouv={gouvernorat} centers={centers} volountaries={volountaries} />
       
      
       <div className="form"></div>
@@ -43,4 +44,4 @@ function Volontaire() {
   );
 }
 
-export default Volontaire;
+export default AddVolontaire;

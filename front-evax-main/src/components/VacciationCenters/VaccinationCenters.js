@@ -30,7 +30,7 @@ function VaccinationCenters({centers, pharmacie, deleteCenter}) {
                 <TabPane tab="Pharmacie" key="2" className="centre">
                     
                         
-                        <Pharmacies pharmacieData={pharmacie} delCenter={deleteCenter}/>
+                    <Pharmacies pharmacieData={pharmacie} delCenter={deleteCenter}/>
                     
                 </TabPane>
             </Tabs>
