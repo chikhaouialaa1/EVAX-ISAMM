@@ -237,37 +237,37 @@ router.post("/new-volontaire", async function (req, res) {
         if (err) {
           console.log(err);
         } else {
-          Centre.find({ _id: req.body.centre}, (err, data3) => {
-          if (err) {
-            console.log(err);
-          }else {
-          ville_name = data1[0].name;
-          gouv_name = data2[0].name;
-          center_name = data3[0].name;
-          console.log(name);
+          Centre.find({ _id: req.body.centre }, (err, data3) => {
+            if (err) {
+              console.log(err);
+            } else {
+              ville_name = data1[0].name;
+              gouv_name = data2[0].name;
+              center_name = data3[0].name;
+              console.log(name);
 
-          const Volont = new VolontaireSchema({
-            username: req.body.username,
+              const Volont = new VolontaireSchema({
+                username: req.body.username,
 
-            email: req.body.email.toLowerCase(),
-            password: encryptedPassword,
-            role: req.body.role,
-            gouvernorat: req.body.gouvernorat,
-            ville: req.body.ville,
-            centre: req.body.centre,
-            ville_name: ville_name,
-            gouv_name: gouv_name,
-            center_name: center_name,
+                email: req.body.email.toLowerCase(),
+                password: encryptedPassword,
+                role: req.body.role,
+                gouvernorat: req.body.gouvernorat,
+                ville: req.body.ville,
+                centre: req.body.centre,
+                ville_name: ville_name,
+                gouv_name: gouv_name,
+                center_name: center_name,
+              });
+              console.log(Volont);
+              Volont.save(function (err, user) {
+                console.log(err);
+                if (err) return res.json(err);
+                console.log(user);
+                return res.send(user).status(200);
+              });
+            }
           });
-          console.log(Volont);
-          Volont.save(function (err, user) {
-            console.log(err);
-            if (err) return res.json(err);
-            console.log(user);
-            return res.send(user).status(200);
-          });
-        }
-        });
         }
       });
     }
@@ -282,10 +282,12 @@ router.get("/volontaire", function (req, res) {
 });
 
 // get by id
-router.post("/volontaire-id", function (req, res) {
-  var volontaireID = req.body._id;
+router.get("/Volontaire-id/:id", function (req, res) {
+  //  try{
+  var volId = req.params.id;
+  console.log(volId);
   try {
-    volontaire.find({ _id: volontaireID }, (err, data) => {
+    volontaire.find({ _id: volId }, (err, data) => {
       if (err) {
         return res.send("error").status(404);
       }
@@ -296,19 +298,20 @@ router.post("/volontaire-id", function (req, res) {
     console.log(err);
   }
 });
+
 // delete volontaire
 router.post(
-  "/volontaire-delete",
+  "/Volontaire-del/:id",
 
   function (req, res) {
     try {
-      var volontaireID = req.body._id;
+      var volId = req.params.id;
+      console.log(volId);
       volontaire.deleteOne(
-        { _id: volontaireID },
+        { _id: volId },
         () => {
-          return res.send(
-            "volontaire " + volontaireID + "deleted successfully"
-          );
+          console.log(volId);
+          return res.send("volontaire" + volId + "deleted successfully");
         },
         (err) => {
           if (err) console.log(err);
@@ -320,9 +323,8 @@ router.post(
     }
   }
 );
-
 //update
-router.post(
+/*router.post(
   "/volontaire-update",
 
   function (req, res) {
@@ -352,7 +354,37 @@ router.post(
       return res.send("error").status(400);
     }
   }
-);
+);*/
+
+router.post("/Volontaire-id/:id", function (req, res) {
+  //  try{
+  console.log(req.body);
+  var volId = req.params.id;
+  const vol = new VolontaireSchema({
+    _id: volId,
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    gouvernorat: req.body.gouvernorat,
+    center_name: req.body.center_name,
+    ville_name: req.body.ville_name,
+    gouv_name: req.body.gouv_name,
+  });
+
+  console.log(req.body.username);
+  VolontaireSchema.findOneAndUpdate(
+    { _id: volId },
+    vol,
+    { new: true },
+    (err, contact) => {
+      if (err) {
+        console.log(err);
+        res.status(400).json(err);
+      }
+      return res.send(vol).status(200);
+    }
+  );
+});
 
 router.post("/Vaccin", function (req, res) {
   const vaccin = new Vaccine({
@@ -538,7 +570,18 @@ router.get("/nbRegistred", async (req, res) => {
 });
 
 router.get("/nbvaccinated", async (req, res) => {
-  let result = await confirnatedUser.countDocuments({ validated: true });
+  let result = await confirnatedUser.countDocuments({
+    doseOne: false,
+    doseTwo: false,
+  });
+  console.log(result);
+  res.json(result);
+});
+router.get("/nbvaccinatedOne", async (req, res) => {
+  let result = await confirnatedUser.countDocuments({
+    doseOne: true,
+    doseTwo: false,
+  });
   console.log(result);
   res.json(result);
 });
