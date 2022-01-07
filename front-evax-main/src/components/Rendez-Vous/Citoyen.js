@@ -16,6 +16,8 @@ function Citoyen() {
   useEffect(() => {
       dispatch(centerActions.fetchCenters())
     }, [])
+    const [name, setName] = useState("")
+
     let [center_id, setCenter_id] = useState("")
 const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MTM4ZDIxNmNiZTgzMDRlIiwiZW1haWwiOiJheW1AZ21haWwuY28iLCJhY3RpdmF0aW9uIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE2NDE1OTU0MzMsImV4cCI6MTY0MTYwMjYzM30.Dr11MeMIscr8kwijDc3mHgfWDSzGpP-B06Wy8xmuB4c"
     const centers = useSelector((state) => state.centers)
@@ -25,7 +27,13 @@ const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MT
         <Option value={item._id}>{item.name}</Option>
       )
     })
-
+    console.log("aaaaaaaaaaaaaaaaa",centers)
+    const optionsVille = centers.list.map((item, index)=>{
+      console.log(item);
+      return(
+        <Option value={item._id}>{item.name}</Option>
+      )
+    })
     const handleAddCenter = () => {
       addCenter(center_id,token)
     }
@@ -43,13 +51,23 @@ const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MT
                 className="input"
                 placeholder="choisir Center"
                 onChange={(value)=>{
+                  dispatch(centerActions.fetchCenterVaccinById(value))
                   center_id = value
                   setCenter_id(value)
                 }}
             >
                {options}
             </Select>
-           
+            <Select
+                className="input"
+                placeholder="choisir ville"
+                onChange={(value)=>{
+                  name = value
+                  setName(value)
+                }}
+            >
+               {optionsVille}
+            </Select>
             <div style={{ margin: "auto" }}>
               <h6>RendezVous </h6>
               <Button className="suivant"  onClick={handleAddCenter} >
