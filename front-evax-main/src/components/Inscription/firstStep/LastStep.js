@@ -1,7 +1,11 @@
 import React from 'react'
 import './FirstStep.css'
 import { Input, DatePicker, InputNumber, Button, Radio} from 'antd';
+import {data} from './SecondStep'
+
 function LastStep() {
+    console.log(data)
+
     return (
         <div className="formulaire">
 

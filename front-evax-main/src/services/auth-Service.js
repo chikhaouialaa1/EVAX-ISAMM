@@ -5,7 +5,7 @@ import Axios from 'axios'
 export const inscription = async (user) => {
   console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",user)
   const result = await Axios.post(
-    "https://evaxtest.herokuapp.com/VaccinCenter",
+    "http://localhost:4000/user/register",
     user
   )
   return result.data

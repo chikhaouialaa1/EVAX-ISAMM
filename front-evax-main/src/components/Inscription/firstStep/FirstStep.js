@@ -8,10 +8,10 @@ import { Input, DatePicker, InputNumber, Button} from 'antd';
 var data=[]
 
 var user={
-    name:'',
+    first_name:'',
     email:'',
     role:'',
-    date:'',
+    date_nais:'',
     ncin:'',nmobile:'',password:'',
 }
 

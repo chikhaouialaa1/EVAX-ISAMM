@@ -21,18 +21,17 @@ const SECRET_KEY = process.env.SECRET_KEY;
 router.use(express.json());
 
 router.post("/user/register", async (req, res) => {
-  console.log("tesst");
+  console.log(req.body);
 
   try {
-    const { first_name, last_name, email, password, date_nais, ncin, nmobile } =
-      req.body;
+    const { first_name, email,role,date_nais, ncin, nmobile, password  } =
+      req.body.data;
 
-    if (!(email && password && first_name && last_name)) {
+    if (!(email && password && first_name )) {
       res.status(400).send("All input is required");
     }
 
     const oldUser = await User.findOne({ email });
-
     console.log(oldUser);
 
     if (oldUser) {
@@ -42,7 +41,7 @@ router.post("/user/register", async (req, res) => {
 
     const user = await User.create({
       first_name,
-      last_name,
+      
       email: email.toLowerCase(),
       date_nais,
       ncin,
@@ -288,6 +287,64 @@ router.post(
   }
   
 )
+
+router.post('/rdv',(req,resp)=>{
+  dcodedToken = jwt.verify(req.body.token,process.env.SECRET_KEY);
+  console.log(req.body)
+  user_id=dcodedToken.user_id
+  function addMinutes(date, minutes) {
+      return new Date(new Date(date).getTime() + minutes*60000);
+  }
+  function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+    var d = new Date();
+console.log(d);
+  centre.findOne({_id:req.body.center_id  }, function(err, docs) {
+      var date_diff_indays = function(date1, date2) {
+          dt1 = new Date(date1);
+          dt2 = new Date(date2);
+          return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+          }
+          var days=date_diff_indays(Date.now(), docs.rendervous);
+          if(days<=0){
+              var now  = new Date();
+              now.setDate(now.getDate() + 1)
+              now.setHours(8);
+              now.setMinutes(0);
+              docs.rendervous=now;
+              docs.currentcapacity=docs.capacity;
+          }
+      docs.currentcapacity=docs.currentcapacity-30;
+      if(docs.currentcapacity<=0){
+          docs.currentcapacity=docs.capacity;
+          //docs.rendervous=addDays(docs.rendervous,1);
+          docs.rendervous=addMinutes(docs.rendervous,30);
+      }
+      if(new Date(docs.rendervous).getHours()>=17){
+          docs.rendervous=addMinutes(docs.rendervous,60*15);
+      }
+      console.log(new Date(docs.rendervous).getHours());
+      User.findOneAndUpdate({_id:user_id},  {'date':docs.rendervous}, {new: true}, function(err, doc) {
+        if (!err) {
+          console.log("saved");
+        }
+    });
+      centre.findOneAndUpdate({_id:req.body.center_id },
+          docs,
+          { new: true },
+          (err, contact) => {
+          if (err) {
+            resp.status(400).json(err);
+          }
+          return resp.send("rendervous Done").status(200)
+
+        });
+  })
+ 
+})
 
 
 
