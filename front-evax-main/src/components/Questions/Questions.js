@@ -9,7 +9,7 @@ function Questions({msg}) {
   const lista= msg.map((item, index)=>{
     console.log(item.message)
     return(
-      <li key={item._id}>{item.message}</li>
+      <div key={item._id}>{item.message}</div>
   
     )
     

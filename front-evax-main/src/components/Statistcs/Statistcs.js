@@ -5,22 +5,13 @@ import { CheckCircleTwoTone, ArrowDownOutlined } from '@ant-design/icons';
 import { PieChart } from "react-minimal-pie-chart";
 import { Icon } from '@iconify/react';
 
+function Statistcs({stat},props) {
 
-
-function Statistcs({stat}) {
-  const statList = stat.map((item, index) => {
-    console.log(item.vaccineName);
-    return(
-      <div className="list">
-      <li key={item._id} style={{marginRight:"200", color:"black"}}>fffffffff{item.vaccineName}</li>
-      </div>
-    )
-    
-  });
 
   return (
     
       <div className="site-statistic-demo-card">
+       
         <Row  style={{marginLeft:400 }} gutter={12}>
           <Col span={6} style={{marginTop:30}}>
             <Card>
@@ -37,7 +28,7 @@ function Statistcs({stat}) {
           <Col span={6} style={{marginTop:30}}>
             <Card>
               <Statistic
-                title="Vacciné : Première dose" 
+                title="Vacciné :Première dose" 
                 value={9.3}
                 precision={2}
                 valueStyle={{ color: "#cf1322" }}
@@ -59,7 +50,6 @@ function Statistcs({stat}) {
             </Card>
           </Col>
         </Row>
-        <div className="statvac">{statList}</div>
         <PieChart
           animation
           animationDuration={500}
@@ -74,11 +64,18 @@ function Statistcs({stat}) {
             marginTop: "200px",
           }}
           data={[
-            { title: "One", value: 10, color: "#DAF7A6" },
+            { title: "One", value: 10, color: "#DAF7A6" ,label:"hello"},
             { title: "Two", value: 15, color: "#ABEBC6" },
             { title: "Three", value: 20, color: "#F7BA68" },
           ]}
         />
+        <div className="statvac">
+
+        {stat.map((item, index) => (
+        <div className="user" style={{marginLeft:600}}>{item.quantity}</div>
+      ))}
+        </div>
+ 
         
       </div>
     )

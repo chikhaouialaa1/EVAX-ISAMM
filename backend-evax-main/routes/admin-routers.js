@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
 const confirnatedUser = require("../model/confirmedUsersSchema");
+const registerdUser = require("../model/userSchema");
 const VaccinesSchema = require("../model/VaccinesSchema");
 const Vaccine = require("../model/Vaccine");
 const VaccinStock = require("../model/VaccinesSchema");
@@ -456,7 +457,7 @@ router.post(
 router.get("/nbRegistred",async (req, res) => {
 
   let result =
-  await confirnatedUser.countDocuments({ });
+  await registerdUser.countDocuments({ });
  console.log(result)
   res.json(result);
  });

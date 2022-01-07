@@ -2,6 +2,7 @@ import { Button } from "antd";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+
 import Navbar from "../../../components/Navar/Navbar";
 import Questions from "../../../components/Questions/Questions";
 import backI from "../../../image/header.png";
@@ -14,6 +15,8 @@ function Home() {
     useEffect(() => {
         dispatch(actions.fetchMessages())
       }, [])
+
+
 
   return (
     <div className="home-container">
@@ -64,8 +67,8 @@ function Home() {
         <h1>Symptôme de COVID-19</h1>
       </div>
       <Questions msg={messages.list}></Questions>
-      <div className="footer">
-        <h1>footer</h1>
+      <div className="footer" >
+  
       </div>
     </div>
   );
