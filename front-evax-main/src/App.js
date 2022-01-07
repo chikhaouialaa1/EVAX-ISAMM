@@ -52,7 +52,7 @@ function App() {
         <Route path="/citoyen" element={<Citoyen/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/jpoDetail" element={<JpoDetail/>}/>
+        <Route path="/jpoDetail/:id" element={<JpoDetail/>}/>
         <Route path="/volontaire" element={<Volontaire/>}/>
         <Route path="/volontaireDetail" element={<VolontaireDetail/>}/>
       </Routes>

@@ -42,7 +42,7 @@ const columnsVolonatire = [
     
   ];
 
-function JpoDescription() {
+function JpoDescription({jpoDescription}) {
     const [visible, setVisible] = useState(false);
     return (
         <div>
@@ -135,10 +135,8 @@ function JpoDescription() {
             </Drawer>
             <h5 style={{color:"#ABABFD", marginTop:"25px", fontSize:'20px'}}>Détails</h5>
             <Descriptions layout="vertical" labelStyle={{color:"#2E4765", fontWeight:'bold'}} >
-                <Descriptions.Item label="Titre" >Jpo blabla</Descriptions.Item>
-                <Descriptions.Item label="Gouvernorat">Tunis</Descriptions.Item>
-                <Descriptions.Item label="Ville">Tunis</Descriptions.Item>
-                <Descriptions.Item label="Date">30-12-2021</Descriptions.Item>
+                <Descriptions.Item label="Titre" >{jpoDescription.titre}</Descriptions.Item>
+                <Descriptions.Item label="Date">{jpoDescription.date}</Descriptions.Item>
                 <Descriptions.Item label="Stock en vaccin">100</Descriptions.Item>
                 <Descriptions.Item label="Nombre volontaire">50</Descriptions.Item>
             </Descriptions>
