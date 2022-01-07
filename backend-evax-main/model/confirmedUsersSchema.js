@@ -21,6 +21,14 @@ confirnatedUser=mongoose.Schema({
         type: Boolean,
         required: false,
         default:false
+    },
+    doseOne: {
+        type: Boolean,
+               default:false
+    },
+    doseTwo: {
+        type: Boolean,
+        default:false
     }
     /*,
     vaccinatedID: {

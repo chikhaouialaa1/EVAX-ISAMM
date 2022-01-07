@@ -8,6 +8,7 @@ import RendezVous from './pages/AdminPage/RendezVous/RendezVous'
 import AdminSideBar from './pages/AdminPage/Vaccin/Vaccin'
 import Jpo from './pages/AdminPage/JPO/Jpo'
 import AddCenter from './pages/AdminPage/VaccinationCenter/AddCenter/AddCenter';
+import AddVolontaire from './pages/AdminPage/Volontaire//AddVolontaire/AddVolontaire';
 import AddVaccin from './pages/AdminPage/Vaccin/AddCenter/AddCenter';
 import AddCenterVaccin from './pages/AdminPage/VaccinationCenter/AddCenter/AddCenterVaccin';
 
@@ -22,9 +23,8 @@ import Citoyen from './components/Citoyen/Citoyen'
 
 import { Provider } from 'react-redux';
 import JpoDetail from './pages/AdminPage/JPO/JpoDetail/JpoDetail';
-import Volontaire from './pages/AdminPage/Volontaire/Volontaire';
+import Volontaire from './pages/AdminPage/Volontaire/VolontaireList';
 import VolontaireDetail from './pages/AdminPage/Volontaire/VolantaireDetail/VolontaireDetail';
- import ReactGa from 'react-ga'
 import AddPharmacie from './pages/AdminPage/VaccinationCenter/AddCenter/AddPharmacie';
 
 
@@ -40,7 +40,13 @@ function App() {
         <Route path="/vaccin" element={<AdminSideBar/>}/>
         <Route path="/jpo" element={<Jpo/>}/>
         <Route path="/addCenter" element={<AddCenter/>}/>
+        <Route path="/addVolontaire" element={<AddVolontaire/>}/>
+
+        <Route path="/centerDetail" element={<CenterDetail/>}/>
+        <Route path="/accueil" element={<Home/>}/>
+
         <Route path="/addPharmacie/:type" element={<AddPharmacie/>}/>
+
         <Route path="/addCenter/:id" element={<AddCenterVaccin/>}/>
 
         <Route path="/addVaccin" element={<AddVaccin/>}/>
@@ -55,6 +61,8 @@ function App() {
         <Route path="/jpoDetail/:id" element={<JpoDetail/>}/>
         <Route path="/volontaire" element={<Volontaire/>}/>
         <Route path="/volontaireDetail" element={<VolontaireDetail/>}/>
+        <Route path="/Dashboard" element={<Dashboard/>}/>
+        
       </Routes>
     </Router>
       

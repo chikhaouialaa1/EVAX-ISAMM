@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import {Input, Button, Select } from 'antd';
 import 'antd/dist/antd.css';
 import './AddCenterFrom.css'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch} from "react-redux"
 import * as govActions from '../../../redux/actions/Gouvernorat/index'
 import * as centerActions from '../../../redux/actions/Centres/index'
 import {Link} from 'react-router-dom'
@@ -97,6 +97,14 @@ function AddCenterForm({gouvernorat}) {
             <Input placeholder="Entrer centre" className="input"
             value={manager}
             onChange={(e) => setManager(e.target.value)}/>
+
+            <h6>Capacité</h6>
+            <Input placeholder="Entrer capacité du centre pour chaque 1/2 heure" className="input"
+            value={capacity}
+            onChange={(e) => setCapacity(e.target.value)}/>
+            
+            <Button className="button" onClick={handleAddCenter}>Ajouter Centre</Button>
+
             
                  <h6>Capacité</h6>
              <Input placeholder="Entrer capacité du centre pour chaque 1/2 heure" className="input"
@@ -123,6 +131,7 @@ function AddCenterForm({gouvernorat}) {
                 
             
             
+
         </div>
         
        

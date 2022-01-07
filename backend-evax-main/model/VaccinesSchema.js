@@ -5,6 +5,9 @@ vaccinesSchema=mongoose.Schema({
         type: String,
         required: true,
     },
+    centerName : {
+        type: String,
+    },
     quantity : {
         type: Number,
         required: true,

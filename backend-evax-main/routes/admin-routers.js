@@ -1,17 +1,19 @@
 const express = require("express");
 const User = require("../model/userSchema");
 const confirmation = require("../model/conifmrationSchema");
-const ConfirmationUsers = require("../model/confirmedUsersSchema");
+const confirnatedUser = require("../model/confirmedUsersSchema");
+const registerdUser = require("../model/userSchema");
 const VaccinesSchema = require("../model/VaccinesSchema");
 const Vaccine = require("../model/Vaccine");
+const VaccinStock = require("../model/VaccinesSchema");
 
 const Message = require("../model/ContactSchema");
 const Centre = require("../model/vaccinationCentreSchema");
 const gouvernorat = require("../model/gouvernoratSchema");
-const ville = require("../model/ville")
+const ville = require("../model/ville");
 const Operator = require("../model/OperatorSchema");
-const volontaire = require("../model/VolontaireSchema")
-const pharmacie = require("../model/pharmacieSchema")
+const volontaire = require("../model/VolontaireSchema");
+const pharmacie = require("../model/pharmacieSchema");
 
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -20,6 +22,8 @@ require("dotenv").config();
 var nodemailer = require("nodemailer");
 const middlewares = require("../middleware/user-midlewares");
 const vaccinationCentreSchema = require("../model/vaccinationCentreSchema");
+const { db } = require("../model/userSchema");
+const VolontaireSchema = require("../model/VolontaireSchema");
 const SECRET_KEY = process.env.SECRET_KEY;
 router.use(express.json());
 
@@ -30,33 +34,27 @@ router.post(
   function (req, res) {
     try {
       const centre = new Centre({
-        name : req.body.name,  
-        ville : req.body.ville,        
-        manager : req.body.manager,        
-        capacity : req.body.capacity,
-        isPharmacie: req.body.isPharmacie      
-      
-    });
-    
-    
+        name: req.body.name,
+        ville: req.body.ville,
+        manager: req.body.manager,
+        capacity: req.body.capacity,
+        isPharmacie: req.body.isPharmacie,
+      });
+
       console.log(centre);
-      centre.save(function(err, user) {
-        console.log(err)
-          if (err) return res.json(err);
-         
-         res.status(200).send("centre added successfully");
-    
-        });
-     
-    
+      centre.save(function (err, user) {
+        console.log(err);
+        if (err) return res.json(err);
+
+        res.status(200).send("centre added successfully");
+      });
     } catch {
       return res.send("error").status(400);
     }
   }
 );
 
-
-router.put('/Vaccination-centre-updated/:id', async (req, res) => {
+router.put("/Vaccination-centre-updated/:id", async (req, res) => {
   const filter = {
     _id: req.params.id,
   };
@@ -65,7 +63,7 @@ router.put('/Vaccination-centre-updated/:id', async (req, res) => {
   try {
     const updated_center = await Centre.findOneAndUpdate(filter, updateObject);
     if (!updated_center) {
-      return res.status(404).json({ message: 'center no found' });
+      return res.status(404).json({ message: "center no found" });
     }
     res.send("success")
   } catch (err) {
@@ -192,37 +190,97 @@ router.get("/Messages", function (req, res) {
     return res.send(data).status(200);
   });
 });
+
 //gestion volontaire
 //new volontaire
-router.post(
+/*router.post(
   "/new-volontaire",
 
   async function (req, res) {
     try {
+    
+      console.log(req.body)
       const { username, email, password, role, gouvernorat, ville, centre } =
       req.body;
       encryptedPassword = await bcrypt.hash(password, 10);
+      ville.find({ _id: req.body.ville }, (err, data1) => {
+        if (err) {
+         console.log(err)
+        }else{
+          gouvernorat.find({ _id: req.body.gouvernorat }, (err, data2) => {
+            if (err) {
+             console.log(err)
+            }else{
       const vol = await volontaire.create({
-        username, email:email.toLowerCase(), password: encryptedPassword, role, gouvernorat, ville, centre
+        username, email:email.toLowerCase(), password: encryptedPassword, role, ville_name:data1[0].name,gouv_name:data2[0].name,gouvernorat, ville, centre
       })
-        return res.status(200).send("volontaire created successfully");
+      console.log(ville_name
+      )
+        return res.status(200).send(vol);
       
-    } catch {
+    }}) } }) }catch {
       return res.send("error").status(400);
     }
   }
-);
+);*/
+router.post("/new-volontaire", async function (req, res) {
+  let name = "";
+  encryptedPassword = await bcrypt.hash(req.body.password, 10);
+
+  ville.find({ _id: req.body.ville }, (err, data1) => {
+    if (err) {
+      console.log(err);
+    } else {
+      gouvernorat.find({ _id: req.body.gouvernorat }, (err, data2) => {
+        if (err) {
+          console.log(err);
+        } else {
+          Centre.find({ _id: req.body.centre}, (err, data3) => {
+          if (err) {
+            console.log(err);
+          }else {
+          ville_name = data1[0].name;
+          gouv_name = data2[0].name;
+          center_name = data3[0].name;
+          console.log(name);
+
+          const Volont = new VolontaireSchema({
+            username: req.body.username,
+
+            email: req.body.email.toLowerCase(),
+            password: encryptedPassword,
+            role: req.body.role,
+            gouvernorat: req.body.gouvernorat,
+            ville: req.body.ville,
+            centre: req.body.centre,
+            ville_name: ville_name,
+            gouv_name: gouv_name,
+            center_name: center_name,
+          });
+          console.log(Volont);
+          Volont.save(function (err, user) {
+            console.log(err);
+            if (err) return res.json(err);
+            console.log(user);
+            return res.send(user).status(200);
+          });
+        }
+        });
+        }
+      });
+    }
+  });
+});
+
 //get all volontaire
 router.get("/volontaire", function (req, res) {
-  volontaire.find()
-    .then((vol) => {
-      res.json(vol);
-    });
+  volontaire.find().then((vol) => {
+    res.json(vol);
+  });
 });
 
 // get by id
 router.post("/volontaire-id", function (req, res) {
-  
   var volontaireID = req.body._id;
   try {
     volontaire.find({ _id: volontaireID }, (err, data) => {
@@ -244,9 +302,11 @@ router.post(
     try {
       var volontaireID = req.body._id;
       volontaire.deleteOne(
-        { _id: volontaireID},
+        { _id: volontaireID },
         () => {
-          return res.send("volontaire " + volontaireID + "deleted successfully");
+          return res.send(
+            "volontaire " + volontaireID + "deleted successfully"
+          );
         },
         (err) => {
           if (err) console.log(err);
@@ -267,19 +327,18 @@ router.post(
     try {
       var volontaireID = req.body._id;
       const { username, email, password, role, gouvernorat, ville, centre } =
-      req.body;
-      
+        req.body;
+
       volontaire.updateOne(
-        { _id: volontaireID},
+        { _id: volontaireID },
         {
           username: username,
-          email:email,
-          password:password,
-          role:role,
-          gouvernorat:gouvernorat,
-          ville:ville,
-          centre:centre
-
+          email: email,
+          password: password,
+          role: role,
+          gouvernorat: gouvernorat,
+          ville: ville,
+          centre: centre,
         },
         res.send("volontaire updated successfully").status(200),
         (err) => {
@@ -293,39 +352,38 @@ router.post(
   }
 );
 
-router.post('/Vaccin', function(req, res){
+router.post("/Vaccin", function (req, res) {
   const vaccin = new Vaccine({
-    vaccineName : req.body.vaccineName        
-});
+    vaccineName: req.body.vaccineName,
+  });
 
-console.log(vaccin);
-vaccin.save(function(err, user) {
-  console.log(err)
+  console.log(vaccin);
+  vaccin.save(function (err, user) {
+    console.log(err);
     if (err) return res.json(err);
-   
-    return res.send(user).status(200);
-});
-})
 
-router.post('/Add_Vaccin', function(req, res){
+    return res.send(user).status(200);
+  });
+});
+
+router.post("/Add_Vaccin", function (req, res) {
   const vaccin = new VaccinesSchema({
-    vaccineName : req.body.vaccineName        
-});
+    vaccineName: req.body.vaccineName,
+  });
 
-console.log(vaccin);
-vaccin.save(function(err, user) {
-  console.log(err)
+  console.log(vaccin);
+  vaccin.save(function (err, user) {
+    console.log(err);
     if (err) return res.json(err);
-   
+
     return res.send(user).status(200);
+  });
 });
-})
 router.get("/vaccins", function (req, res) {
   Vaccine.find({}, (err, data) => {
     return res.send(data).status(200);
   });
 });
-
 
 //check specific centre
 router.get("/Vaacin-id/:id", function (req, res) {
@@ -348,61 +406,92 @@ router.post("/Vaccin-id/:id", function (req, res) {
   //  try{
   var centreId = req.params.id;
   const vaccin = new Vaccine({
-    _id:centreId,
-    vaccineName : req.body.Vaccin.vaccineName      
-});
+    _id: centreId,
+    vaccineName: req.body.Vaccin.vaccineName,
+  });
 
-  console.log(req.body.Vaccin.vaccineName  );
-  Vaccine.findOneAndUpdate({_id:centreId  },
+  console.log(req.body.Vaccin.vaccineName);
+  Vaccine.findOneAndUpdate(
+    { _id: centreId },
     vaccin,
-     { new: true },
-     (err, contact) => {
-     if (err) {
-       console.log(err)
-       res.status(400).json(err);
-     }
- });
+    { new: true },
+    (err, contact) => {
+      if (err) {
+        console.log(err);
+        res.status(400).json(err);
+      }
+    }
+  );
 });
 
 router.post("/VaccinCenter", function (req, res) {
-  let name="";
-  Vaccine.find({ _id: req.body.vaccin }, (err, data) => {
+  let name = "";
+  Vaccine.find({ _id: req.body.vaccin }, (err, data1) => {
     if (err) {
-     console.log(err)
-    }else{
-      name=data[0].vaccineName
-      console.log(name)
-      const vaccin = new VaccinesSchema({
-        centerID:req.body.id,
-        vaccinID:req.body.vaccin,
-        vaccineName : name ,
-        quantity:  req.body.quantity  
-    });
-    console.log(vaccin)
-    vaccin.save(function(err, user) {
-      console.log(err)
-        if (err) return res.json(err);
-       console.log(user)
-        return res.send(user).status(200);
-    });
-     
-    }
-    });
- 
-  
- });
+      console.log(err);
+    } else {
+      Centre.find({ _id: req.body.id }, (err, data2) => {
+        if (err) {
+          console.log(err);
+        } else {
+          VaccinesSchema.findOne(
+            { centerID: req.body.id, vaccinID: req.body.vaccin },
+            (err, data) => {
+              if (!data) {
+                name = data1[0].vaccineName;
+                Cname = data2[0].name;
+                console.log(name);
 
- router.get("/Vaacin-stock/:id", function (req, res) {
+                const vaccin = new VaccinesSchema({
+                  centerID: req.body.id,
+                  vaccinID: req.body.vaccin,
+                  vaccineName: name,
+                  centerName: Cname,
+                  quantity: req.body.quantity,
+                });
+                console.log(vaccin);
+                vaccin.save(function (err, user) {
+                  console.log(err);
+                  if (err) return res.json(err);
+                  console.log(user);
+                  return res.send(user).status(200);
+                });
+              } else {
+                data.quantity =
+                  Number(data.quantity) + Number(req.body.quantity);
+                VaccinesSchema.findOneAndUpdate(
+                  { centerID: req.body.id, vaccinID: req.body.vaccin },
+                  data,
+                  { new: true },
+                  (err, contact) => {
+                    if (err) {
+                      console.log(err);
+                      res.status(400).json(err);
+                    }
+                    console.log(data.quantity);
+                    return res.send(data).status(200);
+                  }
+                );
+              }
+            }
+          );
+        }
+      });
+    }
+  });
+});
+
+router.get("/Vaacin-stock/:id", function (req, res) {
   //  try{
   var centreId = req.params.id;
-  console.log(centreId+"aaaaaaaaaaaaaaaaa");
+  console.log(centreId + "aaaaaaaaaaaaaaaaa");
   try {
     VaccinesSchema.find({ centerID: centreId }, (err, data) => {
       if (err) {
         return res.send("error").status(404);
       }
       console.log("ddddddddddddddddddd");
-      console.log(data)
+      console.log(data);
       console.log("ddddddddddddddddddd");
 
       return res.send(data).status(200);
@@ -436,7 +525,26 @@ router.post(
   }
 );
 
+//Stat
 
+//Registres USers stat
 
+router.get("/nbRegistred", async (req, res) => {
+  let result = await registerdUser.countDocuments({});
+  console.log(result);
+  res.json(result);
+});
+
+router.get("/nbvaccinated", async (req, res) => {
+  let result = await confirnatedUser.countDocuments({ validated: true });
+  console.log(result);
+  res.json(result);
+});
+
+router.get("/vaccinStat", function (req, res) {
+  VaccinStock.find({}, (err, data) => {
+    return res.send(data).status(200);
+  });
+});
 
 module.exports = router;

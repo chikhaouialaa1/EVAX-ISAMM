@@ -10,3 +10,11 @@ export const addMsg = async (message) => {
     
     return result.data
   }
+  export const getMsg= async () => {
+    //await delay(1000)
+
+    const result = await Axios.get(
+        "http://localhost:4000/Messages"
+    )
+    return result.data
+  }

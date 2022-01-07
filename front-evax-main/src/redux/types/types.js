@@ -1,4 +1,9 @@
+//Messages de page contact
 export const ADD_MSG = "ADD_MSG";
+export const FETCH_MSG_REQUEST = "FETCH_MSG_REQUEST"
+export const FETCH_MSG_SUCCESS = "FETCH_MSG_SUCCESS"
+export const FETCH_MSG_FAILURE = "FETCH_MSG_FAILURE"
+
 //centers
 export const FETCH_CENTER_REQUEST = "FETCH_CENTER_REQUEST"
 export const FETCH_CENTER_SUCCESS = "FETCH_CENTER_SUCCESS"
@@ -13,6 +18,12 @@ export const FETCH_CENTER_VACCIN_BY_ID="FETCH_CENTER_VACCIN_BY_ID"
 export const FETCH_GOV_REQUEST = "FETCH_GOV_REQUEST"
 export const FETCH_GOV_SUCCESS = "FETCH_GOV_SUCCESS"
 export const FETCH_GOV_FAILURE = "FETCH_GOV_FAILURE"
+
+//voluntaries
+export const FETCH_VOL_REQUEST = "FETCH_VOL_REQUEST"
+export const FETCH_VOL_SUCCESS = "FETCH_VOL_SUCCESS"
+export const FETCH_VOL_FAILURE = "FETCH_VOL_FAILURE"
+export const ADD_VOL = "ADD_VOL"
 
 // ville
 export const FETCH_VILLE_REQUEST = "FETCH_VILLE_REQUEST"
@@ -36,3 +47,15 @@ export const FETCH_JPO_FAILURE = "FETCH_JPO_FAILURE"
 export const FETCH_JPO_BY_ID = "FETCH_JPO_BY_ID"
 export const ADD_JPO = "ADD_JPO"
 export const DELETE_JPO = "DELETE_JPO"
+//inscription
+export const INSCRIPTION = "INSCRIPTION"
+
+//Vaccin pour stat 
+export const FETCH_VACSTAT_REQUEST = "FETCH_VACSTAT_REQUEST"
+export const FETCH_VACSTAT_SUCCESS = "FETCH_VACSTAT_SUCCESS"
+export const FETCH_VACSTAT_FAILURE = "FETCH_VACSTAT_FAILURE"
+
+
+
+
+

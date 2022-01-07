@@ -106,8 +106,10 @@ router.post("/user/login", async (req, res) => {
                   "confirmation code already sent , please activate your account !",
               })
               .status(200);
+
           } else {
             confirmationcoode = randomInteger(0, 9999).toString();
+            console.log(confirmationcoode)
             userConfirmation.set({ confirmationId: confirmationcoode });
             userConfirmation.save();
             emailSenderFunction(confirmationcoode, user.email);
@@ -133,7 +135,7 @@ router.post("/user/login", async (req, res) => {
 });
 
 router.post(
-  "user/account/validation",
+  "/user/account/validation",
   middlewares.verifyjwt,
   async (req, res) => {
     const token = req.headers["authorization"];
@@ -246,7 +248,6 @@ router.post(
   async(req,res)=>{
     try {
 
-    
     msg=new ContactSchema(
      req.body
     )
