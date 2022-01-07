@@ -192,6 +192,35 @@ router.post(
   }
 );
 
+router.post('/vaccination',middlewares.verifyjwt,middlewares.isUser, function(req, res){
+  try{
+      const token = req.headers['authorization']
+      dcodedToken = jwt.verify(token,process.env.SECRET_KEY);
+      userid=dcodedToken.user_id
+
+      var user =  User.findById({_id:userid });
+      var {governementId,vaccinationCenterId}=req.body
+      
+      const confirmationUsers = ConfirmationUsers.create({
+        userid,
+        governementId,
+        vaccinationCenterId,
+        Date:"Selected Date by admin"
+      
+      })
+
+      return  res.send("confirmationUsers done").status(200)
+
+  }
+  catch{return res.send("invalid token").status(401)}
+
+  });
+
+
+
+
+  
+
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

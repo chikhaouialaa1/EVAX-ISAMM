@@ -22,11 +22,14 @@ function VolontaireList() {
         dispatch(actions.fetchVol())
       }, [])
       console.log(voluntaries)
+      const deleteVol=  (id) => {
+        dispatch(actions.deleteVol(id))}
     return (
         <div className="vaccinationCenter">
             <AdminSideBar/>
-          
-            <VolontaireLists vol={voluntaries} />
+            {voluntaries.loading  && <div>Loading ... </div>}
+            {!voluntaries.loading && isVisible &&(
+            <VolontaireLists vol={voluntaries} deleteVol={deleteVol} />)}
             
             
         </div>

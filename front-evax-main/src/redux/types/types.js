@@ -26,6 +26,9 @@ export const FETCH_VOL_FAILURE = "FETCH_VOL_FAILURE"
 export const FETCH_VOL_By_Center_REQUEST = "FETCH_VOL_By_Center_REQUEST"
 export const FETCH_VOL_By_Center_SUCCESS = "FETCH_VOL_By_Center_SUCCESS"
 export const FETCH_VOL_By_Center_FAILURE = "FETCH_VOL_By_Center_FAILURE"
+export const FETCH_VOL_BY_ID = "FETCH_VOL_BY_ID"
+export const DELETE_VOL = "DELETE_VOL"
+export const UPDATE_VOL="UPDATE_VOL"
 export const ADD_VOL = "ADD_VOL"
 
 // ville
