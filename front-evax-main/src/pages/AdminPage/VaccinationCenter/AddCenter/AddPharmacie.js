@@ -1,36 +1,25 @@
-import React, { useEffect }from 'react'
+import React, { useState, useEffect }from 'react'
 import './AddCenter.css'
-
 import { useParams } from "react-router-dom";
 import { Table, Button} from 'antd';
-
 import AdminSideBar from '../../../../components/AdminSideBar/AdminSideBar'
 import AdminHeader from '../../../../components/AdminHeader/AdminHeader';
 import AddCenterForm from '../../../../components/VacciationCenters/AddCenterForm/AddCenterForm';
 import { useDispatch, useSelector } from "react-redux"
 import * as govActions from '../../../../redux/actions/Gouvernorat/index'
-
-
-
 import {getGouvernorat} from '../../../../services/center.service'
 import AddPharmacieFrom from '../../../../components/VacciationCenters/AddCenterForm/AddPharmacieFrom';
 
-
-function AddCenter() {
-
+function AddPharmacie() {
     const gouvernorat = useSelector((state) => state.gouvernorat)
     const dispatch = useDispatch()
-
-  
-
     const [loading, setLoading] = useState(false)
     const [isVisible, setIsVisible] = useState(true)
     const toggleVisibility = () => {
         setIsVisible(!isVisible)
       }
-    
-
-    
+    const  {type}  = useParams();
+    console.log(type)
     useEffect(() => {
         dispatch(govActions.fetchGov())
       }, [])
@@ -40,7 +29,7 @@ function AddCenter() {
             <div className="content">
                 <AdminHeader title={"Ajouter centre"}/>
                 <div className="form">
-                <AddCenterForm gouvernorat ={gouvernorat}/>
+                <AddPharmacieFrom gouvernorat ={gouvernorat} type={type}/>
                     
                     
                     
@@ -50,4 +39,4 @@ function AddCenter() {
     )
 }
 
-export default AddCenter
+export default AddPharmacie

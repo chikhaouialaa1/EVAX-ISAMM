@@ -4,8 +4,7 @@ import 'antd/dist/antd.css';
 import './AddCenterFrom.css'
 import { useDispatch, useSelector } from "react-redux"
 import * as vaccinActions from '../../../redux/actions/Vaccin/index'
-
-  
+import ReactGa from 'react-ga'
 
 function AddVaccinForm({gouvernorat}) {
   
@@ -13,6 +12,11 @@ function AddVaccinForm({gouvernorat}) {
   const [vaccineName, setName] = useState("")
 
   const addVaccin =  (vaccineName) => {
+    ReactGa.event({
+      category:'Button', 
+      action:'Vaccin ajouté',
+      label:'Ajouter vaccin'
+    })
     dispatch(vaccinActions.addVaccin({vaccineName}))
   }
 
@@ -29,9 +33,16 @@ function AddVaccinForm({gouvernorat}) {
             <h6>Nom Vaccin</h6>
             <Input placeholder="Entrer vaccin" className="input"
             value={vaccineName}
-            onChange={(e) => setName(e.target.value)}/>
+            onChange={(e) => {setName(e.target.value); const value = e.target.value;
+              if(!isNaN(+value)){
+                console.log("false")
+                ReactGa.event({
+                  category:'Erreur de type', 
+                  action:'type n"est pas string',
+                  label:'Type mismatch'
+                })}}}/>
            
-            <Button className="button" onClick={handleAddVaccin}>Ajouter Centre</Button>
+            <Button className="button" onClick={handleAddVaccin}>Ajouter Vaccin</Button>
         </div>
     )
 }

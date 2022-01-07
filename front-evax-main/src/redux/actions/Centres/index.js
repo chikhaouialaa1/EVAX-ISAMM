@@ -2,15 +2,28 @@ import * as types from "../../types/types"
 import * as api from '../../../services/center.service'
 
 export const fetchCenters = () => async (dispatch) => {
+  function filterByPharmacie(item) {
+    return item.isPharmacie;
+  }
+  function filterByCenter(item) {
+    if (item.isPharmacie ==false) {
+      return true
+    }
+    return false;
+  }
     dispatch({
       type: types.FETCH_CENTER_REQUEST,
       
     })
        try {
          const tasks = await api.getCenter()
+         let pharmacie = tasks.filter(filterByPharmacie)
+         let centers = tasks.filter(filterByCenter)
           dispatch({
             type: types.FETCH_CENTER_SUCCESS,
             tasks,
+            centers,
+            pharmacie,
           })
        } catch (e) {
         dispatch({
@@ -26,6 +39,14 @@ export const addCenter = (center) => async (dispatch) => {
   dispatch({
     type: types.ADD_CENTER,
     center: newCenter,
+  })
+}
+export const addPharmacie = (pharmacie) => async (dispatch) => {
+  const newPharmacie = await api.addCenter(pharmacie)
+
+  dispatch({
+    type: types.ADD_PHARMACIE,
+    center: newPharmacie,
   })
 }
 export const deleteCenter = (id) => async (dispatch) => {
