@@ -5,12 +5,13 @@ import {SearchOutlined} from '@ant-design/icons';
 import Centers from './centers/Centers';
 import AdminHeader from '../AdminHeader/AdminHeader';
 import CenterDescription from './CenterDescription/CenterDescription';
+import Pharmacies from './centers/Pharmacies';
 const { TabPane } = Tabs;
 
 function callback(key) {
   console.log(key);
 }
-function VaccinationCenters({centers, deleteCenter}) {
+function VaccinationCenters({centers, pharmacie, deleteCenter}) {
     return (
         <div className="vaccinationCenters">
             <AdminHeader/>
@@ -28,7 +29,8 @@ function VaccinationCenters({centers, deleteCenter}) {
                 </TabPane>
                 <TabPane tab="Pharmacie" key="2" className="centre">
                     
-                        <Centers/>
+                        
+                        <Pharmacies pharmacieData={pharmacie} delCenter={deleteCenter}/>
                     
                 </TabPane>
             </Tabs>

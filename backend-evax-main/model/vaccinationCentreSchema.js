@@ -22,7 +22,12 @@ vaccinationCentreSchema=mongoose.Schema({
     } ,
     rendervous :  {
         type : String
+    },
+    isPharmacie :  {
+        type : Boolean,
+        default: false,
     } 
+
    })
 
 module.exports = centre = mongoose.model(

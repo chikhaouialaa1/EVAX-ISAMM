@@ -10,8 +10,7 @@ import * as govActions from '../../../../redux/actions/Gouvernorat/index'
 import {getGouvernorat} from '../../../../services/center.service'
 import AddPharmacieFrom from '../../../../components/VacciationCenters/AddCenterForm/AddPharmacieFrom';
 
-function AddCenter() {
-
+function AddPharmacie() {
     const gouvernorat = useSelector((state) => state.gouvernorat)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
@@ -19,8 +18,8 @@ function AddCenter() {
     const toggleVisibility = () => {
         setIsVisible(!isVisible)
       }
-    
-    
+    const  {type}  = useParams();
+    console.log(type)
     useEffect(() => {
         dispatch(govActions.fetchGov())
       }, [])
@@ -30,7 +29,7 @@ function AddCenter() {
             <div className="content">
                 <AdminHeader title={"Ajouter centre"}/>
                 <div className="form">
-                <AddCenterForm gouvernorat ={gouvernorat}/>
+                <AddPharmacieFrom gouvernorat ={gouvernorat} type={type}/>
                     
                     
                     
@@ -40,4 +39,4 @@ function AddCenter() {
     )
 }
 
-export default AddCenter
+export default AddPharmacie
