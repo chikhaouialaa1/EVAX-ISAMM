@@ -29,3 +29,6 @@ app.use(admin_routes)
 jpo_routes = require("./routes/JpoRoutes")
 app.use(jpo_routes)
 
+operator_routes = require("./routes/operator-routes")
+app.use(operator_routes)
+

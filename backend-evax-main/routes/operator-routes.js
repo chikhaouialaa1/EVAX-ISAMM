@@ -24,7 +24,7 @@ const SECRET_KEY=process.env.SECRET_KEY
 router.use(express.json())
 
 
-router.get('/vaccination-list',middlewares.isOperator, function(req, res){
+router.get('/vaccination-list', function(req, res){
     ConfirmationUsers.find({},(err,data)=> {
         console.log(data)
         return res.send(data).status(200)
@@ -125,7 +125,7 @@ router.post("/operator/login", async (req, res) => {
 });
 
 
-router.get("/users/lc",middlewares.isOperator, async (req, res) => {
+router.get("/users/lc", async (req, res) => {
     const token = req.headers['authorization']
     dcodedToken = jwt.verify(token,process.env.SECRET_KEY);
     console.log(dcodedToken)
@@ -137,7 +137,6 @@ router.get("/users/lc",middlewares.isOperator, async (req, res) => {
     console.log(conterlist)
     res.send({"centers_list" : conterlist , "availableVaccinList" : availableVaccinList})
 });
-
 
 
 module.exports = router ;
