@@ -77,12 +77,13 @@ router.post("/user/register", async (req, res) => {
 router.post("/user/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
+console.log(req.body)
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      res.status(405).send("All input is required");
     }
     const user = await User.findOne({ email });
-    if (user && (await bcrypt.compare(password, user.password))) {
+   
+    if (user ) {
       const token = jwt.sign(
         { user_id: user._id, email, activation: user.active, role: user.role },
         SECRET_KEY,
@@ -92,7 +93,9 @@ router.post("/user/login", async (req, res) => {
       );
 
       user.token = token;
-      try {
+      console.log(token)
+      return res.status(200).send(token);
+      /*try {
         if (!user.active) {
           let userid = user._id;
           userConfirmation = confirmation.findOne({ userid });
@@ -122,7 +125,7 @@ router.post("/user/login", async (req, res) => {
       } catch {
         return res.send("invalid token").status(401);
       }
-      return res.status(200).send(token).redirect("/home");
+      return res.status(200).send(token).redirect("/home");*/
     }
 
     return res.status(400).send("Invalid Credentials");
@@ -259,6 +262,7 @@ router.post(
 )
 
 router.post('/rdv',(req,resp)=>{
+  console.log(req.body)
   dcodedToken = jwt.verify(req.body.token,process.env.SECRET_KEY);
   console.log(req.body)
   user_id=dcodedToken.user_id

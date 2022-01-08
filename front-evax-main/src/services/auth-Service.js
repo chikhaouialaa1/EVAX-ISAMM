@@ -10,6 +10,16 @@ export const inscription = async (user) => {
   )
   return result.data
 }
+
+export const login = async (user) => {
+  const result = await Axios.post(
+    "http://localhost:4000/user/login",
+    user
+  )
+  console.log("ww",result.data)
+  localStorage.setItem("mytime", result.data);
+  return result.data
+}
 let badpassword = false 
 /*
 function AuthService(email , password) {

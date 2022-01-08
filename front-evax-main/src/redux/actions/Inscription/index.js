@@ -9,3 +9,13 @@ export const inscription = (user) => async (dispatch) => {
     user: user1,
   })
 }
+
+
+export const login = (user) => async (dispatch) => {
+  const user1 = await api.login(user)
+console.log("qqqqqqqqqqqqqqqqqqqqq"+user1)
+  dispatch({
+    type: types.LOGIN,
+    user: user1
+  })
+}

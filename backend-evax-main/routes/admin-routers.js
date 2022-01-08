@@ -32,7 +32,8 @@ router.post(
         name : req.body.name,  
         ville : req.body.ville,        
         manager : req.body.manager,        
-        capacity : req.body.capacity,        
+        capacity : req.body.capacity,     
+        currentcapacity:req.body.capacity   
       
     });
     
@@ -396,6 +397,27 @@ router.post("/VaccinCenter", function (req, res) {
  
   
  });
+
+ router.get("/Vaccin-stock/:id", function (req, res) {
+  //  try{
+  var centreId = req.params.id;
+  console.log(centreId+"aaaaaaaaaaaaaaaaa");
+  try {
+    VaccinesSchema.find({ centerID: centreId }, (err, data) => {
+      if (err) {
+        return res.send("error").status(404);
+      }
+      console.log("ddddddddddddddddddd");
+      console.log(data)
+      console.log("ddddddddddddddddddd");
+
+      return res.send(data).status(200);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
  router.get("/Vaacin-stock/:id", function (req, res) {
   //  try{

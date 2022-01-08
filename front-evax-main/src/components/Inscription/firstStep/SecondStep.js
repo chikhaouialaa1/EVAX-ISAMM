@@ -22,8 +22,8 @@ function SecondStep() {
     user.date_nais=data.date
     const { Option } = Select;
     console.log(data)
-    const [state1, setState1]= useState()
-    const [state2, setState2]= useState()
+    const [state1, setState1]= useState("")
+    const [state2, setState2]= useState("")
     return (
         
         <div className="formulaire">
@@ -34,6 +34,7 @@ function SecondStep() {
                     //console.log(e.target.value)
                     setState1(e.target.value)
                     user.email=state1
+
                     //data.push(e.target.value)
                     }    
                 }       className="inputInfo"/>

@@ -4,6 +4,7 @@ import './Login.css';
 import Navbar from '../../../components/Navar/Navbar';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import AuthService from '../../../../src/services/auth-Service'
+import * as loginActions from '../../../redux/actions/Inscription/index'
 
 import { useState } from 'react'    
 
@@ -34,10 +35,22 @@ function Login() {
                     <Navigate to="/" /> 
                 }
 */
-    const [state1, setState1]= useState()
-    const [state2, setState2]= useState()    
     const dispatch = useDispatch()   
-       
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [code, setCode] = useState("")
+
+    const login =  (email,password) => {
+      dispatch(loginActions.login({email,password}))
+    }
+  
+    const handleLogin = () => {
+        login(email,password)
+     
+    }
+    
+      
+    
     return (
         <div className="inscri">
             <Navbar/>
@@ -46,22 +59,16 @@ function Login() {
             <div className="choiceButton">
                 <h2> Login</h2>
                 <div style={{margin:"auto"}}>
-                    <h6>Email</h6>
-                    <Input
-                    key={1}
-                    value={state1}
-                    onChange={(e)=>
-                        //console.log(e.target.value),
-                        setState1(e.target.value)
-                    }
-                    key={2}
-                    type="text" className="col form-control"
-                    size="large" placeholder="email" className="inputInfo"/>
+                <h6>Email</h6>
+            <Input placeholder="Email"    className="inputInfo"
+                            size="large"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}/>
                         <h6>Mot de passe</h6>
                         <Input.Password
                          index="2"
-                         value={state2}
-                         onChange={(e)=>setState2(e.target.value)}
+                         value={password}
+                         onChange={(e)=>setPassword(e.target.value)}
                             className="inputInfo"
                             size="large"
                             placeholder="mot de passe"
@@ -69,15 +76,22 @@ function Login() {
                             />
                     <Button 
                     onClick={()=>{
-                        dispatch(  authUser({
-                         email: state1,
-                         password: state2
-                     }));
-                         setState1('');
-                         setState2('');
-                         
+                        dispatch(  handleLogin);
+                        
                      }}
                     className="suivant">Login </Button>
+
+<h6>Confirmation code</h6>
+            <Input placeholder="Confirmation code"    className="inputInfo"
+                            size="large"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}/>
+            <Button 
+                    onClick={()=>{
+                        dispatch(  handleLogin);
+                        
+                     }}
+                    className="suivant">Confirme </Button>
                 </div>
                
             

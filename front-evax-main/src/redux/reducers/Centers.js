@@ -3,7 +3,7 @@ import * as types from '../types/types'
 const initialState = {
     loading: false,
     errors: false,
-    list: [],
+    list: [], list2: [],
     selectedCenter:{},
   }
 
@@ -12,6 +12,9 @@ const centers = (state = initialState, action) =>{
         case types.FETCH_CENTER_VACCIN_BY_ID:{
             return{...state,
                 list:[...state.list, action.center]}
+        }case types.FETCH_CENTER_VACCIN:{
+            return{...state,
+                list2:[ action.center]}
         }
         case types.FETCH_CENTER_REQUEST:
             return { ...state, loading: true, error: true }

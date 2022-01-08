@@ -5,6 +5,7 @@ const initialState = {
     errors: false,
     list: [],
     selectedVaccin:{},
+    token:""
   }
 
 
@@ -13,6 +14,9 @@ const AuthReducer = (state = initialState, action) =>{
         case types.INSCRIPTION:
             return{...state,
             list:[...state.list, action.User]}
+            case types.LOGIN:
+                return{...state,
+                    token: action.user}
         default:
             return state
     }

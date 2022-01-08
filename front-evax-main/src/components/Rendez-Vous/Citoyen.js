@@ -16,29 +16,40 @@ function Citoyen() {
   useEffect(() => {
       dispatch(centerActions.fetchCenters())
     }, [])
-    const [name, setName] = useState("")
+    const user = useSelector((state) => state.user)
 
+    const [name, setName] = useState("")
+    const [token, setToken] = useState("")
+
+const y=(localStorage.getItem("mytime"))
     let [center_id, setCenter_id] = useState("")
-const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MTM4ZDIxNmNiZTgzMDRlIiwiZW1haWwiOiJheW1AZ21haWwuY28iLCJhY3RpdmF0aW9uIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE2NDE1OTU0MzMsImV4cCI6MTY0MTYwMjYzM30.Dr11MeMIscr8kwijDc3mHgfWDSzGpP-B06Wy8xmuB4c"
-    const centers = useSelector((state) => state.centers)
+//const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGVjYzhjZTBkMGViNGYzNWVjNWY1IiwiZW1haWwiOiJhYWFhYUBhYWEuYyIsImFjdGl2YXRpb24iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTY0MTYwNjM0NCwiZXhwIjoxNjQxNjEzNTQ0fQ.73sBdwRqi_TnUJMgKwensjnyzO8iZVFEynZT_5lcGu8"
+    
+const centers = useSelector((state) => state.centers)
     const options = centers.list.map((item, index)=>{
       console.log(item);
       return(
         <Option value={item._id}>{item.name}</Option>
       )
     })
-    console.log("aaaaaaaaaaaaaaaaa",centers)
-    const optionsVille = centers.list.map((item, index)=>{
-      console.log(item);
+    let x=""
+    
+    console.log("aaaaaaaaaaaaaaaaa",centers.list2)
+    const optionsVille = centers.list2.map((item, index)=>{
+      console.log(index);
+       x = item.map((item2, index2)=>{
+        console.log(item2)
       return(
-        <Option value={item._id}>{item.name}</Option>
+        <Option value={item2._id}>{item2.vaccineName}</Option>
       )
     })
+    })
+
     const handleAddCenter = () => {
-      addCenter(center_id,token)
+      addCenter(center_id,y)
     }
-    const addCenter =  (center_id,token) => {
-      dispatch(userAction.rdv({center_id,token}))
+    const addCenter =  (center_id,y) => {
+      dispatch(userAction.rdv({center_id,y}))
     }
   return (
     <div className="citoyen">
@@ -51,7 +62,7 @@ const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MT
                 className="input"
                 placeholder="choisir Center"
                 onChange={(value)=>{
-                  dispatch(centerActions.fetchCenterVaccinById(value))
+                  dispatch(centerActions.fetchCenterVaccin(value))
                   center_id = value
                   setCenter_id(value)
                 }}
@@ -62,11 +73,11 @@ const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFkOGMyMjk1MT
                 className="input"
                 placeholder="choisir ville"
                 onChange={(value)=>{
-                  name = value
+                
                   setName(value)
                 }}
             >
-               {optionsVille}
+               {x}
             </Select>
             <div style={{ margin: "auto" }}>
               <h6>RendezVous </h6>
