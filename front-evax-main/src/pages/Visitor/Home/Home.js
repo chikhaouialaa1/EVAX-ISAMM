@@ -7,8 +7,23 @@ import Navbar from "../../../components/Navar/Navbar";
 import Questions from "../../../components/Questions/Questions";
 import backI from "../../../image/header.png";
 import * as actions from "../../../redux/actions/Messages/index";
+import centers from "../../../redux/reducers/Centers";
 import "./Home.css";
-
+import { List, Avatar } from 'antd';
+const data = [
+  {
+    title: 'Inscription',
+  },
+  {
+    title: 'Affectation RDV',
+  },
+  {
+    title: 'Vaccination',
+  },
+  {
+    title: 'Suivi',
+  },
+];
 function Home() {
   const messages = useSelector((state) => state.messages)
     const dispatch = useDispatch()
@@ -39,7 +54,7 @@ function Home() {
         >
           Bienvenu au portail de Vaccination contre la COVID-19
         </h1>
-        <Button className="button-inscri">Inscrivez-vous</Button>
+        <Button className="button-inscri" href="/inscription">Inscrivez-vous</Button>
       </div>
       <div className="numero-vert">
         <img src="/num.png" />
@@ -57,15 +72,26 @@ function Home() {
           <h3 style={{ color: "white" }}>80102021</h3>
         </div>
       </div>
-      <div className="stat-container">
-        <h1>Statistique sur les campagnes de vaccination en Tunisie</h1>
+      <h1>Etape de vaccination contre le covid 19</h1>
+
+      <div className="etape-container" style={{display:"flex" ,alignItems:"flex-start"}}>
+        
+        <img src="/etape.png"  style={{width:500,heigth:500, marginLeft:100 , borderRadius:"50%"}}/>
+        <List style={{width:500,heigth:500, marginLeft:100, marginTop:50 }}
+    itemLayout="horizontal"
+    dataSource={data}
+    renderItem={item => (
+      <List.Item>
+        <List.Item.Meta
+          avatar={<Avatar src="./images.png" />}
+          title={<a href="inscription">{item.title}</a>}
+          description=""
+        />
+      </List.Item>
+    )}
+  />,
       </div>
-      <div className="etape-container">
-        <h1>Etape de vaccination contre le covid 19</h1>
-      </div>
-      <div className="etape-container">
-        <h1>Symptôme de COVID-19</h1>
-      </div>
+      
       <Questions msg={messages.list}></Questions>
       <div className="footer" >
   

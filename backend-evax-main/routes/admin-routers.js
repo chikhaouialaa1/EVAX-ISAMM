@@ -562,13 +562,13 @@ router.post(
 //Registres USers stat
 
 router.get("/nbRegistred", async (req, res) => {
-  let result = await registerdUser.countDocuments({});
+  let result = await registerdUser.count({});
   console.log(result);
   res.json(result);
 });
 
 router.get("/nbvaccinated", async (req, res) => {
-  let result = await confirnatedUser.countDocuments({
+  let result = await confirnatedUser.count({
     doseOne: false,
     doseTwo: false,
   });
@@ -576,7 +576,7 @@ router.get("/nbvaccinated", async (req, res) => {
   res.json(result);
 });
 router.get("/nbvaccinatedOne", async (req, res) => {
-  let result = await confirnatedUser.countDocuments({
+  let result = await confirnatedUser.count({
     doseOne: true,
     doseTwo: false,
   });

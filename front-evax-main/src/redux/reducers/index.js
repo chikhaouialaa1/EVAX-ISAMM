@@ -7,6 +7,8 @@ import vaccins from './Vaccins'
 import Jpos from './Jpos'
 
 import vaccinStat from './VacStat'
+import statistic from './Stats'
+
 
 import { combineReducers } from "redux"
 
@@ -18,6 +20,8 @@ const rootReducer = () =>{
     Jpos,
     voluntaries,
     vaccinStat,
+    statistic,
+
 
   })
 }

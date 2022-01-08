@@ -21,4 +21,5 @@ const vaccinStat = (state = initialState, action) =>{
     }
 
 }
-export default vaccinStat
+
+export default vaccinStat;
