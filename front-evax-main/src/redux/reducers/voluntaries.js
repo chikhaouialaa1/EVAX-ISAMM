@@ -4,6 +4,8 @@ const initialState = {
     loading: false,
     errors: false,
     list: [],
+    listVC:[],
+    listTest:[],
     selectedVol:{},
   }
 
@@ -18,6 +20,14 @@ const voluntaries = (state = initialState, action) =>{
             return { ...state, list: [...action.voluntaries], loading: false }
         case types.FETCH_VOL_FAILURE:
             return { ...state, error: true, loading: false }
+        
+        case types.FETCH_VOL_By_Center_REQUEST:
+            return { ...state, loading: true, error: true }
+        case types.FETCH_VOL_By_Center_SUCCESS:
+            return { ...state, listVC: [...action.volantaire], listTest:[...action.voluntaries], loading: false }
+        case types.FETCH_VOL_By_Center_FAILURE:
+            return { ...state, error: true, loading: false }
+
         case types.FETCH_VOL_BY_ID:
             return{...state,
                     selectedVol: action.voluntary}
@@ -32,6 +42,7 @@ const voluntaries = (state = initialState, action) =>{
                   return volontaire
                 })
                 return { ...state, list: updatevols }
+
         default:
             return state
     }

@@ -5,8 +5,12 @@ import FirstStep from '../firstStep/FirstStep';
 import SecondStep from '../firstStep/SecondStep';
 import LastStep from '../firstStep/LastStep';
 import 'antd/dist/antd.css';
-const { Step } = Steps;
+import { useDispatch, useSelector } from "react-redux"
+import {data} from '../firstStep/SecondStep'
+import * as authActions from '../../../redux/actions/Inscription/index'
 
+const { Step } = Steps;
+console.log(data)
 const steps = [
     {
       title: 'First',
@@ -22,6 +26,8 @@ const steps = [
     },
   ];
 function InscriSteps() {
+  const dispatch = useDispatch()
+
     const [current, setCurrent] = React.useState(0);
     const next = () => {
         setCurrent(current + 1);
@@ -29,6 +35,16 @@ function InscriSteps() {
     const prev = () => {
         setCurrent(current - 1);
       };
+      const addVaccin =  (data) => {
+        dispatch(authActions.inscription({data}))
+      }
+    
+      const handleAddVaccin = () => {
+        message.success('Processing complete!') 
+        addVaccin(data)
+       
+      }
+      
     return (
         <div className="firstStep">
             <div className="form1">
@@ -42,7 +58,7 @@ function InscriSteps() {
                     </Button>
                   )}
                   {current === steps.length - 1 && (
-                    <Button className="suivant" onClick={() => message.success('Processing complete!')}>
+                    <Button className="suivant" onClick={() => handleAddVaccin() }>
                       Enregistrer
                     </Button>
                   )}

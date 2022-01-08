@@ -28,6 +28,11 @@ function Login() {
     let res =  AuthService("mayssamelliti@gmail.com","123")
     console.log(res)
     console.log(AuthService("mayssamelliti@gmail.com","123"))
+     {badpassword ?
+                    <Alert message="bad password please try again" type="error" showIcon />
+                    :
+                    <Navigate to="/" /> 
+                }
 */
     const [state1, setState1]= useState()
     const [state2, setState2]= useState()    
@@ -74,11 +79,7 @@ function Login() {
                      }}
                     className="suivant">Login </Button>
                 </div>
-                {badpassword ?
-                    <Alert message="bad password please try again" type="error" showIcon />
-                    :
-                    <Navigate to="/" /> 
-                }
+               
             
             </div>
             

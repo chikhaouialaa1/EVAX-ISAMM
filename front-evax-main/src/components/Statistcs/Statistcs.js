@@ -33,7 +33,7 @@ function Statistcs({ stat, stat2 }) {
           <Card>
             <Statistic
               title="Inscrits"
-              value={stat2.action.count1}
+              value={1}
               valueStyle={{ color: "#3f8600" }}
               prefix={<CheckCircleTwoTone twoToneColor="#52c41a" />}
             />
@@ -43,7 +43,7 @@ function Statistcs({ stat, stat2 }) {
           <Card>
             <Statistic
               title="Vacciné :Première dose"
-              value={stat2.action.count2}
+              value={2}
               valueStyle={{ color: "#cf1322" }}
               prefix={<Icon icon="la:syringe" />}
               suffix=""
@@ -54,7 +54,7 @@ function Statistcs({ stat, stat2 }) {
           <Card>
             <Statistic
               title="Vacciné : Deuxième dose"
-              value={stat2.action.countAll}
+              value={4}
               valueStyle={{ color: "#cf1322" }}
               prefix={<Icon icon="la:syringe" />}
             />

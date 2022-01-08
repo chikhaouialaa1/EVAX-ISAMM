@@ -12,9 +12,9 @@ const statistic = (state = initialState, action) => {
     case types.STATISTIC_REQUEST:
       return {...state, statisticLoading: false, errors: true};
     case types.STATISTIC_SUCCESS:
-      return {action, statisticLoading: false, errors: false};
+      return {...state,list:[...action.statistic], statisticLoading: false, errors: false};
     case types.STATISTIC_FAILURE:
-      return {action, statisticLoading: true, errors: true}
+      return {...state, statisticLoading: true, errors: true}
 
     default:
       return state;
