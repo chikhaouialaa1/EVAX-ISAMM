@@ -77,6 +77,8 @@ function App() {
         <Route path="/addVolontaire" element={<AddVolontaire />} />
         <Route path="/volontaireDetail" element={<VolontaireDetail />} />
         <Route path="/addPharmacie/:type" element={<AddPharmacie />} />
+		<Route path="/test" element={<AddPharmacie />} />
+
 
 
       </Routes>
