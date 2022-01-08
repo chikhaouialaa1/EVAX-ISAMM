@@ -44,6 +44,9 @@ import Volontaire from "./pages/AdminPage/Volontaire/VolontaireList";
 import VolontaireDetail from "./pages/AdminPage/Volontaire/VolantaireDetail/VolontaireDetail";
 import AddPharmacie from "./pages/AdminPage/VaccinationCenter/AddCenter/AddPharmacie";
 import CenterDescription from "./components/Vaccination/VaccinDescription/CenterDescription";
+import ChatbotComponent from './components/chatbot/chatbot';
+
+
 
 function App() {
   return (
@@ -77,6 +80,8 @@ function App() {
         <Route path="/addVolontaire" element={<AddVolontaire />} />
         <Route path="/volontaireDetail" element={<VolontaireDetail />} />
         <Route path="/addPharmacie/:type" element={<AddPharmacie />} />
+		    <Route path="/chatbot" element={<ChatbotComponent />} />
+
 
 
       </Routes>
