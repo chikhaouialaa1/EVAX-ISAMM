@@ -108,6 +108,68 @@ router.post(
   });
 
 //affect center to jpo
+router.post(
+  "/affect-center-to-jpo",
 
+  function (req, res) {
+    try {
+      const jpoCenter  = new JpoCenter({
+        jpoId : req.body.jpoId,  
+        centreId : req.body.centreId, 
+        volontaire: req.body.volontaire      
+    });
+      console.log(jpoCenter);
+      jpoCenter.save(function(err, user) {
+        console.log(err)
+          if (err) return res.json(err);
+         
+         res.status(200).send("center affected successfully");
+    
+        });
+     
+    
+    } catch {
+      return res.send("error").status(400);
+    }
+  }
+);
 
+//delete
+
+router.get("/jpo-del-center", function (req, res) {
+  var idJpo = req.body.jpoId;
+  var idCenter = req.body.centreId;
+JpoCenter.findOne({jpoId:idJpo, centreId: idCenter}).populate("jpoId centreId volontaire")
+.then((jpo) => {
+  JpoCenter.deleteOne(
+    { _id: jpo._id },
+    () => {
+      return res.send("Jpo deleted successfully");
+    },
+    (err) => {
+      if (err) console.log(err);
+      return res.send({ message: "error :" + err });
+    }
+  );
+
+});
+});
+//get jpo-one-center
+router.get("/jpo-one-center", function (req, res) {
+    var idJpo = req.body.jpoId;
+    var idCenter = req.body.centreId;
+  JpoCenter.findOne({jpoId:idJpo, centreId: idCenter}).populate("jpoId centreId volontaire")
+  .then((jpo) => {
+    res.json(jpo);
+  });
+});
+// get jpo all centers
+router.get("/jpo-centers/:id", function (req, res) {
+  var idJpo = req.params.id;
+  JpoCenter.find({jpoId:idJpo}).populate("jpoId centreId volontaire")
+  .then((jpo) => {
+    res.json(jpo);
+  });
+    
+});
 module.exports = router;

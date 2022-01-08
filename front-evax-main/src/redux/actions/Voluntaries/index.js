@@ -13,10 +13,67 @@ export const fetchVol = () => async (dispatch) => {
     });
   } catch (e) {
     dispatch({
+      type: types.FETCH_VOL_REQUEST,
+      
+    })
+       try {
+         const voluntaries = await api.getvoluntaries()
+          dispatch({
+            type: types.FETCH_VOL_SUCCESS,
+            voluntaries,
+          })
+       } catch (e) {
+        dispatch({
+          type: types.FETCH_VOL_FAILURE,
+        })
+       }
+ 
+ }
+ export const fetchVolByCenter = (idCenter) => async (dispatch) => {
+  console.log(idCenter);
+  dispatch({
+    type: types.FETCH_VOL_By_Center_REQUEST,
+    
+  })
+  function filterByID(item) {
+    if (item.center==idCenter) {
+      
+      return true
+    }
+    console.log(item.center)
+    return false;
+  }
+     try {
+       const voluntaries = await api.getvoluntaries()
+       
+       let volantaire = voluntaries.filter(function (item){
+        if (item.centre===idCenter) {
+      
+          return true
+        }
+        console.log(item.centre)
+        return false;
+       })
+       console.log(volantaire)
+        dispatch({
+          type: types.FETCH_VOL_By_Center_SUCCESS,
+          volantaire,
+          voluntaries,
+        })
+     } catch (e) {
+      dispatch({
+        type: types.FETCH_VOL_By_Center_FAILURE,
+      })
+     }
+
+}
+/* export const addVol = (vol) => async (dispatch) => {
+  const newVol = await api.addvoluntary(vol)
+
       type: types.FETCH_VOL_FAILURE,
     });
   }
-};
+};*/
 export const addVol = (vol) => async (dispatch) => {
   const newVol = await api.addvoluntary(vol);
 
