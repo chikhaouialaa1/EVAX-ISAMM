@@ -4,6 +4,8 @@ import gouvernorat from './Gouvernorat'
 import voluntaries from './voluntaries'
 import vaccins from './Vaccins'
 import vaccinStat from './VacStat'
+import statistic from './Stats'
+
 
 import { combineReducers } from "redux"
 
@@ -15,6 +17,8 @@ const rootReducer = () =>{
     voluntaries,
     vaccins,
     vaccinStat,
+    statistic,
+
   })
 }
 
